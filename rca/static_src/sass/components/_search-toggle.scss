@@ -1,0 +1,37 @@
+.search-toggle {
+    $root: &;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+
+    @include media-query(medium) {
+        display: flex;
+    }
+
+    &__label {
+        @include font-size(xs);
+        margin-left: ($gutter * 0.5);
+        color: $color--white;
+    }
+
+    &__icon {
+        fill: $color--white;
+    }
+
+    .app__navigation & {
+        margin-top: ($grid * 4.75);
+        display: flex;
+
+        @include media-query(medium) {
+            margin-top: 0;
+        }
+
+        .headroom--pinned.headroom--not-top & {
+            margin-top: ($grid * 3.75);
+
+            @include media-query(medium) {
+                margin-top: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{% load util_tags querystring %}
+
+{% if paginator_page.paginator.num_pages > 1 %}
+<nav class="pagination" aria-label="Pagination">
+    <ul class="pagination__container body body--two">
+        {% if paginator_page.has_previous %}
+            <li class="pagination__button pagination__button--prev">
+                <a class="pagination__button-link" href="{% querystring page=paginator_page.previous_page_number %}" class="previous">
+                    <span class="pagination__button-label">previous</span>
+                    <svg width="23" height="23" class="pagination__button-icon" aria-hidden="true">
+                        <use xlink:href="#arrow-left"></use>
+                    </svg>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for pagination_section in paginator_page.paginator.page_range|slice_pagination:paginator_page.number %}
+            {% if not forloop.first %}
+                <li class="pagination__item">
+                    ...
+                </li>
+            {% endif %}
+            {% for i in pagination_section %}
+                <li class="pagination__item {% if i == paginator_page.number %}pagination__item--current{% endif %}">
+                    <a href="{% querystring page=i %}" class="pagination__link">{{i}}</a>
+                </li>
+            {% endfor %}
+        {% endfor %}
+
+        {% if paginator_page.has_next %}
+            <li class="pagination__button pagination__button--next">
+                <a class="pagination__button-link next" href="{% querystring page=paginator_page.next_page_number %}">
+                    <span class="pagination__button-label">next</span>
+                    <svg width="23" height="23" class="pagination__button-icon" aria-hidden="true">
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>{% endif %}

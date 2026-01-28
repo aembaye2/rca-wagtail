@@ -1,0 +1,121 @@
+.logo {
+    $root: &;
+    $custom-breakpoint-min: 1023px;
+    $custom-breakpoint-max: 1220px;
+    display: block;
+
+    &:hover,
+    &:focus,
+    &:active {
+        #{$root}__image {
+            opacity: 0.7;
+        }
+    }
+
+    &__image {
+        height: auto;
+        fill: $color--white;
+        transform-origin: left;
+        transition: opacity $transition;
+    }
+
+    .header &,
+    .app__navigation & {
+        #{$root}__image {
+            @include media-query(large) {
+                width: 162px;
+            }
+
+            // Custom breakpoint to stop logo intersecting with gridline
+            @media only screen and (max-width: $custom-breakpoint-max) and (min-width: $custom-breakpoint-min) {
+                width: 140px;
+            }
+        }
+    }
+
+    .header & {
+        @include media-query(large) {
+            position: absolute;
+            width: calc(
+                var(--outer-grid-width, 220px) - 1px
+            ); // so grid line shows
+            background-color: $color--black;
+            padding-bottom: ($grid * 2);
+        }
+
+        &::before {
+            @include media-query(large) {
+                position: absolute;
+                z-index: -1; // don't overlap focus state of logo
+                left: 1px;
+                width: calc(
+                    var(--margin-width, 290px) + 2px
+                ); // so we don't get a 1px line when rounded down
+                content: '';
+                display: block;
+                height: 110px;
+                background-color: $color--black;
+                transform: translate3d(-100%, 0, 0);
+            }
+
+            // Custom breakpoint to stop logo intersecting with gridline
+            @media only screen and (max-width: $custom-breakpoint-max) and (min-width: $custom-breakpoint-min) {
+                height: 101px;
+            }
+        }
+    }
+
+    .footer & {
+        #{$root}__image {
+            max-width: 100%;
+
+            @include media-query(medium) {
+                width: 230px;
+            }
+
+            &--dark {
+                display: none;
+            }
+        }
+    }
+
+    // Styles to prevent flicker from pinned to normal mode
+    .headroom--unpinned & {
+        @include media-query(large) {
+            position: static;
+        }
+
+        &::before {
+            @include media-query(large) {
+                content: none;
+            }
+        }
+    }
+
+    .headroom--unpinned .header & {
+        #{$root}__image {
+            transform: scale(0.57);
+        }
+    }
+
+    .headroom--not-top .header &,
+    .headroom--not-top .app__navigation & {
+        position: static;
+        width: auto; // don't resize logo when not at the top
+        padding-bottom: 0;
+
+        #{$root}__image {
+            width: auto;
+            transform: scale(0.57);
+        }
+
+        &::before {
+            content: none;
+        }
+    }
+
+    .nav-open .app__navigation & {
+        @include z-index(header-logo);
+        position: relative;
+    }
+}

@@ -1,0 +1,180 @@
+.slideshow {
+    $root: &;
+    $meta-height: 70px;
+    $meta-height-w-author: 70px;
+    padding-bottom: ($gutter * 2);
+    overflow-x: hidden; // Prevent horizontal scroll on iOS
+
+    &--block {
+        @include z-index(under-gridlines);
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    &__liveregion {
+        @include hidden();
+    }
+
+    &__controls {
+        grid-row-gap: $gutter;
+
+        @include media-query(large) {
+            position: relative;
+            top: -$meta-height;
+            pointer-events: none; // ensure links in overlaid content still work
+
+            #{$root}--block & {
+                top: -50px;
+            }
+        }
+    }
+
+    &__controls-group {
+        pointer-events: auto; // ensure prev/next buttons are clickable
+        grid-column: 1 / -1;
+        margin: 0 auto;
+
+        @include media-query(large) {
+            @include z-index(nav-overlay);
+            grid-column: 5;
+            margin: unset;
+
+            &::after {
+                @include z-index(under);
+                content: '';
+                position: absolute;
+                display: block;
+                right: -20%;
+                top: 0;
+                height: $meta-height;
+                width: 30%;
+            }
+        }
+    }
+
+    &__button {
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        margin: 0;
+        padding: 0;
+        transition: background-color $transition, opacity $transition-cubic;
+
+        &:first-child {
+            margin-right: $gutter;
+        }
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:hover,
+        &:active,
+        &:focus {
+            outline: 0;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+
+        &:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    }
+
+    &__bullet-container {
+        grid-column: 1 / span 2;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        width: 100%;
+        pointer-events: none;
+
+        @include media-query(large) {
+            display: none;
+        }
+    }
+
+    &__bullet {
+        flex: 1;
+        height: 2px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:hover,
+        &:active,
+        &:focus {
+            outline: 0;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+    }
+
+    .bg--dark & {
+        #{$root}__controls-group {
+            background-color: $color--black;
+
+            &::after {
+                background-color: $color--black;
+            }
+        }
+
+        #{$root}__bullet {
+            background-color: $color--scrollbar-darkbg-bg;
+
+            &.glide__bullet--active {
+                background-color: $color--white;
+            }
+        }
+
+        #{$root}__button {
+            &:hover,
+            &:active,
+            &:focus {
+                stroke: $color--black;
+                background-color: $color--white;
+            }
+        }
+
+        #{$root}__button-icon {
+            stroke: $color--meta-darkbg;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__controls-group {
+            background-color: $color--white;
+
+            &::after {
+                background-color: $color--white;
+            }
+        }
+
+        #{$root}__bullet {
+            background-color: $color--scrollbar-lightbg-bg;
+
+            &.glide__bullet--active {
+                background-color: $color--black;
+            }
+        }
+
+        #{$root}__button {
+            &:hover,
+            &:active,
+            &:focus {
+                stroke: $color--white;
+                background-color: $color--black;
+            }
+        }
+
+        #{$root}__button-icon {
+            stroke: $color--meta-lightbg;
+        }
+    }
+
+    .app--project-detail & {
+        padding-bottom: ($gutter * 4.5);
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 2);
+        }
+    }
+}

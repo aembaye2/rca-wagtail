@@ -1,0 +1,15 @@
+.schools {
+    // Compensating for the different between section--top-space-small and section--start
+    &__anchor-compensator {
+        position: relative;
+        top: -($gutter);
+
+        @include media-query(medium) {
+            top: -($gutter * 0.5);
+        }
+
+        @include media-query(large) {
+            top: -($gutter * 2);
+        }
+    }
+}

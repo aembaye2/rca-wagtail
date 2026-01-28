@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}
+
+<div class="hero {% if modifier %}hero--{{ modifier }}{% endif %}">
+    {% image page.hero_image fill-320x568 as image_small %}
+    {% image page.hero_image fill-768x1024 as image_medium %}
+    {% image page.hero_image fill-1440x900 as image_large %}
+
+    <img srcset="{{ image_small.url }} 320w,
+                 {{ image_medium.url }} 768w,
+                 {{ image_large.url }} 1440w"
+                 sizes="(max-width: 598px) 320px,
+                        (max-width: 1022px) and (min-width: 599px) 768px,
+                        (min-width: 1023px) 1440px"
+                 src="{{ image_large.url }}"
+                 alt="{{ image_large.alt }}"
+                 class="hero__image"
+                >
+</div>
+
+<div class="hero__placeholder">
+    <span class="hero__menu-toggler js-menu-on"></span>
+</div>

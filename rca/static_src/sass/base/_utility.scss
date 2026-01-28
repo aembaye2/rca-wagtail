@@ -1,0 +1,45 @@
+.u {
+    &-small-bp-only {
+        display: block;
+
+        @include media-query(medium) {
+            display: none;
+        }
+    }
+
+    &-small-and-medium-bp-only {
+        display: block;
+
+        @include media-query(large) {
+            display: none;
+        }
+    }
+
+    &-medium-and-large-bp-only {
+        display: none;
+
+        @include media-query(medium) {
+            display: block;
+        }
+    }
+
+    &-large-bp-only {
+        display: none;
+
+        @include media-query(large) {
+            display: block;
+        }
+    }
+
+    &-pos-rel {
+        position: relative;
+    }
+
+    &-paragraph-emulator {
+        margin-bottom: $gutter; // useful for when p tags need richtext tags inside them div.u-paragraph-emulator
+    }
+
+    &-offset-outline {
+        outline-offset: -2px; // Used to ensure links with overflow hidden still show the outline when tabbing
+    }
+}

@@ -1,0 +1,69 @@
+.hero {
+    $root: &;
+    overflow: hidden;
+
+    &--medium {
+        max-height: 340px;
+
+        @include media-query(medium) {
+            max-height: 536px;
+        }
+
+        @include media-query(large) {
+            max-height: 780px;
+        }
+    }
+
+    &--home {
+        @include z-index(base);
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100);
+
+        #{$root}__image {
+            height: 100vh;
+
+            @include media-query(medium) {
+                height: 100%;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        min-height: 290px;
+
+        @include media-query(medium) {
+            min-height: 450px;
+        }
+
+        @include media-query(large) {
+            min-height: 575px;
+        }
+    }
+
+    &__placeholder {
+        height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100);
+        pointer-events: none;
+    }
+
+    &__menu-toggler {
+        display: block;
+        height: 99vh;
+    }
+
+    .theme-dark & {
+        color: $color--black;
+        background-color: $color--white;
+    }
+
+    .theme-light & {
+        color: $color--white;
+        background-color: $color--black;
+    }
+}

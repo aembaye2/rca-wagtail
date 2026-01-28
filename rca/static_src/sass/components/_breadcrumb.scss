@@ -1,0 +1,66 @@
+.breadcrumb {
+    $root: &;
+    display: flex;
+    flex-direction: row;
+    grid-column: span 2;
+    margin-bottom: $gutter;
+
+    &__item {
+        @include font-size(xs);
+        display: none;
+
+        @include media-query(medium) {
+            display: block;
+        }
+
+        @include media-query(large) {
+            font-size: 16px; // One off for breadcrumb
+        }
+
+        &:first-child {
+            opacity: 0.7;
+        }
+
+        &:last-child {
+            display: block;
+
+            &::after {
+                content: '';
+
+                @include media-query(medium) {
+                    content: '/';
+                }
+            }
+        }
+
+        &::after {
+            display: inline-block;
+            content: '/';
+            padding-left: ($gutter * 0.5);
+            margin-right: ($gutter * 0.5);
+        }
+    }
+
+    &__item-link {
+        @include underline-hover();
+        position: relative;
+    }
+
+    .title-area--guide & {
+        @include media-query(large) {
+            margin-bottom: ($gutter * 0.75);
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__item-link {
+            color: $color--white;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__item-link {
+            color: $color--black;
+        }
+    }
+}

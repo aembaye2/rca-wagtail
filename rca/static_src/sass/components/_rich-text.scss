@@ -1,0 +1,155 @@
+.rich-text {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @include heading-text();
+        margin-bottom: $gutter;
+        line-height: $line-height-large;
+    }
+
+    h2 {
+        @include font-size(xl);
+        margin-bottom: ($gutter * 1.5);
+
+        @include media-query(large) {
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    h3 {
+        @include font-size(l);
+    }
+
+    h4 {
+        @include font-size(m);
+    }
+
+    h5,
+    h6 {
+        @include font-size(s);
+    }
+
+    ul {
+        list-style: outside disc;
+        margin: 0 0 $gutter $gutter;
+    }
+
+    ol {
+        list-style: inside decimal;
+        margin: 0 0 $gutter;
+    }
+
+    a {
+        text-decoration: underline;
+        transition: $transition color, $transition text-decoration;
+        position: relative;
+
+        .bg--dark & {
+            color: $color--white;
+
+            &:focus,
+            &:hover {
+                color: $color--orange;
+            }
+        }
+
+        .bg--light & {
+            color: $color--black;
+
+            &:focus,
+            &:hover {
+                color: $color--orange;
+            }
+        }
+
+        // Accordion needs to be inverted (bg changes when they open)
+        .bg--dark .accordion__content & {
+            color: $color--black;
+
+            &:focus,
+            &:hover {
+                color: $color--orange;
+            }
+        }
+
+        .bg--light .accordion__content & {
+            color: $color--white;
+
+            &:focus,
+            &:hover {
+                color: $color--orange;
+            }
+        }
+
+        // Links in forms should always show underline
+        .form-item & {
+            background-size: 100% 2px;
+
+            &:hover {
+                @include media-query(medium) {
+                    // As we show underline by default, added opacity so there's some hover interactivity
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+
+    .image {
+        margin-bottom: ($gutter * 1.5);
+        margin-top: ($gutter * 1.5);
+
+        @include media-query(large) {
+            margin-bottom: ($gutter * 2);
+            margin-top: ($gutter * 2);
+        }
+
+        &--full {
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .accordion & {
+        @include font-size(xs);
+    }
+
+    .app--project-detail & {
+        h2 {
+            @include font-size(s);
+            border-width: 0 0 1px;
+            border-style: solid;
+            padding-bottom: ($gutter * 0.5);
+            margin-bottom: $gutter;
+        }
+
+        ul {
+            list-style: outside disc;
+            margin-left: $gutter;
+        }
+
+        li {
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    .bg--dark & {
+        .app--project-detail & {
+            h2 {
+                border-color: $color--grid-line-light;
+            }
+        }
+    }
+
+    .bg--light & {
+        .app--project-detail & {
+            h2 {
+                border-color: $color--grid-line-dark;
+            }
+        }
+    }
+}

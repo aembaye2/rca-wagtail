@@ -1,0 +1,33 @@
+.text-teaser {
+    $root: &;
+
+    &__heading {
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 1.5);
+
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    &__content {
+        grid-column: 1 / span 2;
+
+        @include media-query(large) {
+            grid-column: 3 / span 2;
+        }
+    }
+
+    &__text {
+        @include media-query(large) {
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    .app--alumni & {
+        #{$root}__heading {
+            @include font-size(m);
+        }
+    }
+}

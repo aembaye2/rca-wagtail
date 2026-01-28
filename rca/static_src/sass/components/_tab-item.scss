@@ -1,0 +1,96 @@
+.tab-item {
+    $root: &;
+    @include font-size(xs);
+    @include underline-hover();
+
+    margin-right: ($gutter * 1.5);
+    position: relative;
+    white-space: nowrap;
+    text-decoration: none; // overriding mixin
+
+    &:last-child {
+        display: inline-block;
+        border-right-width: $gutter;
+        border-right-color: transparent;
+        border-right-style: solid;
+
+        @include media-query(medium) {
+            border-right-width: ($gutter * 3);
+        }
+
+        @include media-query(large) {
+            border-right-width: 0;
+        }
+    }
+
+    &.is-active {
+        @include underline-hover-target-reset();
+    }
+
+    &--highlight {
+        // Highlighted butons will stay orange both in dark and light bg.
+        color: $color--orange !important;
+
+        &:hover,
+        &.active {
+            color: $color--orange !important;
+        }
+    }
+
+    .bg--dark & {
+        color: $color--meta-darkbg;
+
+        &:hover,
+        &.active {
+            color: $color--white;
+        }
+
+        &.link--tertiary {
+            color: $color--meta-darkbg;
+
+            &:hover {
+                color: $color--white;
+            }
+        }
+    }
+
+    .bg--light & {
+        color: $color--meta-lightbg;
+
+        &:hover,
+        &.active {
+            color: $color--black;
+        }
+
+        &.link--tertiary {
+            color: $color--meta-lightbg;
+
+            &:hover {
+                color: $color--black;
+            }
+        }
+    }
+
+    // Webkit properties added to fix currentColor not being updated correctly on older android devices
+    // https://stackoverflow.com/questions/36046185/how-to-hack-around-linear-gradient-with-currentcolor-bug-in-chrome
+    /* stylelint-disable property-no-vendor-prefix */
+    .js-is-sticky.jump-nav & {
+        color: $color--meta-lightbg;
+        -webkit-margin-start: 0.1px;
+
+        &:hover {
+            color: $color--black;
+            -webkit-margin-start: 0.2px;
+        }
+
+        &.is-active {
+            color: $color--black;
+            -webkit-margin-start: 0;
+        }
+    }
+    /* stylelint-enable property-no-vendor-prefix */
+
+    .jump-nav & {
+        font-weight: $weight--normal;
+    }
+}

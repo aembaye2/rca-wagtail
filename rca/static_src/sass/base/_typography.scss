@@ -1,0 +1,53 @@
+/*------------------------------------*\
+    $TYPOGRAPHY
+\*------------------------------------*/
+
+html {
+    font-size: calc((map-get($small-font-sizes, xs) / 16px) * 100%);
+    line-height: 1.4;
+    color: $color--primary;
+
+    @include media-query(medium) {
+        font-size: calc((map-get($medium-font-sizes, xs) / 16px) * 100%);
+    }
+
+    @include media-query(large) {
+        font-size: calc((map-get($large-font-sizes, xs) / 16px) * 100%);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @include heading-text();
+    margin: 0;
+}
+
+blockquote {
+    font-style: normal;
+    font-weight: inherit;
+    text-transform: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+cite {
+    font-style: normal;
+    font-weight: inherit;
+    text-transform: inherit;
+}
+
+small {
+    @include font-size(xs);
+}
+
+p {
+    margin: 0 0 $gutter;
+}
+
+b {
+    font-weight: $weight--bold;
+}

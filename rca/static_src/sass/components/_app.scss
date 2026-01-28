@@ -1,0 +1,115 @@
+.app {
+    $root: &;
+
+    &--404 {
+        background-color: $color--black;
+
+        #{$root}__content {
+            padding-top: 200px;
+
+            @include media-query(medium) {
+                padding-top: 300px;
+            }
+        }
+    }
+
+    &__header {
+        @include z-index(header);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        transition: transform $transition-cubic;
+
+        // Hide when scrolling down
+        .headroom--not-top & {
+            transform: translate3d(0, -200%, 0);
+        }
+
+        // Make visible and apply bg colour when pinned, but not at top
+        .headroom--pinned.headroom--not-top & {
+            transform: translate3d(0, 0, 0);
+            background-color: $color--black;
+        }
+
+        // Hide via z-index (for modals)
+        &--hidden {
+            @include z-index(base);
+        }
+    }
+
+    &__navigation {
+        @include z-index(nav);
+        pointer-events: none;
+        transform: translate3d(-100%, 0%, 0);
+        transition: transform $transition-cubic;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        visibility: hidden;
+
+        @include media-query(large) {
+            overflow: hidden;
+        }
+
+        .nav-open & {
+            pointer-events: all;
+            visibility: visible;
+            transform: translate3d(0%, 0%, 0);
+            background: $color--black;
+
+            @include media-query(large) {
+                background: transparent;
+            }
+        }
+    }
+
+    &__search {
+        &--tablet {
+            width: calc(100% - 40px);
+            position: absolute;
+
+            @include media-query(medium) {
+                position: relative;
+                width: 100%;
+            }
+
+            @include media-query(large) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(large) {
+                display: block;
+            }
+        }
+
+        .menu-active & {
+            display: none;
+        }
+    }
+
+    &__footer {
+        // Prevent footer grid lines showing outside of footer area
+        @include z-index(footer);
+        position: relative;
+        clip: rect(auto, auto, auto, auto);
+        clip-path: inset(-0.5px 0 0 0);
+        backface-visibility: hidden;
+    }
+
+    // Make sure the header and navigation are above the shorthand embed
+    // which has a 3rd party z-index of 200
+    &--shorthand-embed {
+        #{$root}__navigation,
+        #{$root}__header {
+            @include z-index(above-shorthand-embed);
+        }
+    }
+}

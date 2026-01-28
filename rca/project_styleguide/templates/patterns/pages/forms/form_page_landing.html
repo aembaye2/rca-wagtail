@@ -1,0 +1,33 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags util_tags static %}
+
+{% block content %}
+
+    <div class="page page--no-hero">
+
+        <div class="page__header bg bg--dark">
+            <div class="title-area title-area--guide grid">
+                <div class="title-area__content">
+                    <h1 class="title-area__heading heading heading--display-two" id="main-content">
+                        Thank you
+                    </h1>
+                    {{ page.thank_you_text|richtext }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block extra_js %}
+    {% if GOOGLE_TAG_MANAGER_ID %}
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event':'form-submission',
+                'formId': '{{ page.id }}',
+                'formName': '{{ page.title }} form'
+            });
+        </script>
+    {% endif %}
+{% endblock%}

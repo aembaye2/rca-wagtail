@@ -1,0 +1,185 @@
+.stat-block {
+    $root: &;
+    padding: ($gutter * 3) 0;
+
+    @include media-query(medium) {
+        padding: ($gutter * 6) 0;
+    }
+
+    &--large {
+        #{$root}__header {
+            @include media-query(large) {
+                margin-bottom: 0;
+            }
+        }
+
+        #{$root}__heading {
+            @include media-query(large) {
+                grid-column: 4 / span 1;
+                margin-right: $gutter;
+            }
+        }
+
+        #{$root}__item-container {
+            @include media-query(large) {
+                margin-bottom: $gutter;
+
+                &:nth-child(2),
+                &:nth-child(6) {
+                    #{$root}__item {
+                        grid-column: 2 / span 1;
+                    }
+                }
+
+                &:nth-child(3),
+                &:nth-child(5) {
+                    #{$root}__item {
+                        grid-column: 4 / span 1;
+                    }
+                }
+
+                &:nth-child(4) {
+                    #{$root}__item {
+                        grid-column: 3 / span 1;
+                    }
+                }
+            }
+        }
+    }
+
+    &__header {
+        @include media-query(large) {
+            margin-bottom: -($gutter * 3.5);
+        }
+    }
+
+    &__footer-action {
+        grid-column: 1 / span 1;
+        margin-bottom: ($gutter * 2);
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+            margin-bottom: ($gutter * 4);
+        }
+    }
+
+    &__heading {
+        grid-column: 1 / span 2;
+        margin-bottom: $gutter;
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+            padding-right: $gutter;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+            padding-right: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &__item {
+        grid-column: 1 / span 2;
+
+        @include media-query(medium) {
+            grid-column: auto;
+        }
+    }
+
+    &__item-container {
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 2.5);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        @include media-query(medium) {
+            &:nth-of-type(even) {
+                #{$root}__item {
+                    grid-column: 2 / span 2;
+                }
+            }
+
+            &:nth-of-type(odd) {
+                #{$root}__item {
+                    grid-column: 1 / span 1;
+                }
+            }
+        }
+
+        @include media-query(large) {
+            &:nth-child(even) {
+                #{$root}__item {
+                    grid-column: 4 / span 1;
+                }
+            }
+
+            &:nth-child(odd) {
+                #{$root}__item {
+                    grid-column: 3 / span 1;
+                }
+            }
+        }
+    }
+
+    &__number-container {
+        position: relative;
+        left: -2px;
+        display: flex;
+        align-items: flex-end;
+
+        @include media-query(medium) {
+            left: -3px;
+        }
+    }
+
+    &__number {
+        font-size: 80px;
+        line-height: 81px;
+        font-weight: $weight--bold;
+        margin-bottom: 0;
+
+        @include media-query(medium) {
+            font-size: 100px;
+            line-height: 94px;
+        }
+
+        @include media-query(large) {
+            font-size: 130px;
+            line-height: 131px;
+        }
+    }
+
+    &__before,
+    &__after {
+        font-size: 36px;
+        line-height: 50px;
+
+        @include media-query(medium) {
+            font-size: 40px;
+            line-height: 56px;
+        }
+
+        @include media-query(large) {
+            font-size: 60px;
+            line-height: 84px;
+        }
+    }
+
+    &__meta {
+        margin-bottom: 0;
+        font-weight: $weight--bold;
+    }
+
+    &__body {
+        margin: ($gutter * 0.5) 0 0;
+        max-width: 270px;
+
+        @include media-query(medium) {
+            padding-right: $gutter;
+            max-width: 100%;
+        }
+    }
+}

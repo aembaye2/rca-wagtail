@@ -1,0 +1,230 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags static %}
+{% get_settings %}
+
+{% block body_class %}
+    app--research-centre
+{% endblock %}
+
+{% block content %}
+
+    {% include "patterns/molecules/hero/hero.html" with hero_image=page.hero_image modifier="medium" %}
+
+    <div class="page page--overlap" >
+
+        <div class="page__notch grid">
+            <div class="page__notch-block bg bg--dark"></div>
+        </div>
+
+        <header class="page__header bg bg--dark">
+            <div class="title-area title-area--breadcrumb title-area--research-centre grid">
+                <div class="title-area__content">
+                    <nav class="title-area__breadcrumb" aria-label="Breadcrumb">
+                        {% include "patterns/molecules/breadcrumb/breadcrumb.html" %}
+                    </nav>
+                    <h1 class="title-area__heading heading heading--display-two" id="main-content">{{ page.title }}</h1>
+                </div>
+                {% if page.hero_image_credit or page.hero_image %}
+                    <div class="title-area__credit layout__@large-start-five layout__@large-span-one">
+                        {% include 'patterns/atoms/image-info/image-info.html' with credit=page.hero_image_credit item=page.hero_image %}
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="page__content">
+
+            <section class="research-top section bg bg--dark">
+
+                <div class="section__row research-centre-overview {% if not research_spaces and not projects %}research-centre-overview--no-margin{% endif %}">
+                    <div class="section__content grid">
+                        <div class="research-centre-overview__content">
+                            <div class="research-centre-overview__body">
+                                {% if page.introduction %}
+                                    <div class="research-centre-overview__heading section__heading heading heading--five">
+                                        {{ page.introduction|linebreaks }}
+                                    </div>
+                                {% endif %}
+                                {% if about_page  %}
+                                    <a href="{{ about_page  }}" class="link link--tertiary link--link">
+                                        <span class="link__label">{{ page.about_page_link_text }}</span>
+                                        <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="research-centre-overview__media">
+                                {% if page.introduction_image %}
+                                    {% include "patterns/organisms/image-video-block/image-video-block.html" with modal=page.video out_of_grid=True curriculum=False heading=False has_meta=False copy=False subheading=False image=page.introduction_image caption=page.video_caption video=page.video %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="research-centre-overview__key-details">
+                            {% include "patterns/molecules/key-details/key-details--centre.html" %}
+                        </div>
+                    </div>
+                </div>
+
+                {% if research_spaces %}
+                    <div class="section__row research-spaces">
+                        <div class="section__header grid">
+                            <h3 class="section__heading heading heading--four">
+                                Research spaces
+                            </h3>
+                        </div>
+                        <div class="section__content grid">
+                            {% include "patterns/organisms/staggered-cards/staggered-cards.html" with staggered_cards=research_spaces %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if projects %}
+                    <div class="section__row section__row--last-large research-highlights">
+                        <div class="section__header grid">
+                            <h3 class="section__heading section__heading--primary heading heading--four">
+                                {% firstof page.highlights_title 'Research highlights' %}
+                            </h3>
+                        </div>
+                        <div class="section__content grid">
+                            {% include "patterns/organisms/carousel/carousel.html" with carousel=projects modifier='carousel carousel--no-margin' control_title="Related projects carousel" datatag='data-carousel' %}
+                            <div class="section__action">
+                            {% if page.research_projects_link %}
+                                <a class="link link--primary link--link body body--two" href="{{ page.research_projects_link }}">
+                                    <span class="link__label">See all research</span>
+                                    <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                                </a>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </section>
+
+            {% if research_opportunities %}
+                <section class="opportunities-to-work section section--above-grid bg bg--light">
+
+                    <div class="section__notch section__notch--opposite">
+                        <div class="section__notch-fill section__notch-fill--second-col"></div>
+                    </div>
+
+                    <div class="section__row section__row--first">
+
+                        <div class="section__header grid">
+                            <h2 class="section__heading section__heading--primary heading heading--two">
+                                Opportunities to work with us
+                            </h2>
+                        </div>
+
+                        <div class="section__content">
+                            {% include "patterns/organisms/categories-panels/categories-panels.html" with categories_panels=research_opportunities %}
+                        </div>
+
+                    </div>
+
+                </section>
+            {% endif %}
+
+            {% if related_programmes.0.related_items %}
+                <section class="section section--notch-mask bg bg--dark">
+
+                    {% if research_opportunities %}
+                        <div class="section__notch section__notch--opposite">
+                            <div class="section__notch-fill section__notch-fill--first-col"></div>
+                        </div>
+                    {% endif %}
+
+                    {% include "patterns/molecules/relatedcontent/relatedprogrammes--large.html" with related_sections=related_programmes title=related_programmes.0.title %}
+
+                    {% if related_staff %}
+                        <div class="section__notch">
+                            <div class="section__notch-fill section__notch-fill--first-col"></div>
+                        </div>
+                    {% endif %}
+
+                </section>
+            {% endif %}
+
+            {% if related_staff %}
+                <section class="section bg bg--light">
+
+                    <div class="section__row section__row--first section__row--last">
+                        {% include "patterns/organisms/people-module/people-module.html" with title=staff_title people=related_staff %}
+                    </div>
+
+                    {% if research_news.slides %}
+                        <div class="section__notch">
+                            <div class="section__notch-fill section__notch-fill--third-col"></div>
+                        </div>
+                    {% endif %}
+
+                </section>
+            {% endif %}
+
+
+            {% if research_news.slides %}
+                <section class="section bg bg--dark">
+                    <div class="section__row section__row--first section__row--last-large">
+                        <div class="partnerships">
+                            <div class="partnerships__header grid">
+                                <h2 class="partnerships__heading heading heading--two">{{ research_news.title }}</h2>
+                            </div>
+                            <div class="partnerships__carousel">
+                                {% include "patterns/organisms/carousel/carousel--square.html" with carousel=research_news.slides modifier='carousel--square' control_title="Research news carousel" datatag='data-peek-carousel' %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if page.news_and_events or page.related_links %}
+                        <div class="section__notch">
+                            <div class="section__notch-fill section__notch-fill--third-col"></div>
+                        </div>
+                    {% endif %}
+
+                </section>
+            {% endif %}
+
+            {% if page.news_and_events or page.related_links %}
+                <section class="section {% if page.news_and_events %}section--start{% endif %} bg bg--light">
+                    {% if page.news_and_events %}
+                        <div class="section__row">
+                            <header class="section__header grid">
+                                <h3 class="section__heading section__heading--primary heading heading--two">News</h3>
+                            </header>
+                            <div class="section__content">
+                                <div class="section__row grid">
+                                    {% include "patterns/organisms/news/news.html" with news=page.news_and_events cta="See all news" %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if page.related_links %}
+                        <div class="section__row section__row--first">
+                            <div class="section__content">
+                                {% include "patterns/organisms/related-links/related-links.html" with related_links=page.related_links title="Related links" %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </section>
+            {% endif %}
+
+            {% if page.legacy_news_and_events %}
+                <section class="section section--end bg bg--dark">
+                    <div class="section__notch section__notch--top">
+                        <div class="section__notch-fill section__notch-fill--third-col"></div>
+                    </div>
+
+                    <div class="section__container">
+                        <header class="section__header grid">
+                            <h3 class="section__heading section__heading--primary heading heading--two">News &amp; events</h3>
+                        </header>
+                        <div class="section__content grid">
+                            {% include "patterns/organisms/news/news_api_content.html" with news=page.legacy_news_and_events %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,339 @@
+.categories-tablist {
+    $root: &;
+    position: relative;
+    padding: $gutter;
+    padding-bottom: $gutter * 0.5;
+    // Allow the tablist to overflow into the next column, as much as the contact block below.
+    margin-right: $image-offset-right;
+
+    @include media-query(medium) {
+        padding-bottom: $gutter;
+    }
+
+    &--no-padding-x {
+        padding: $gutter 0;
+    }
+
+    &--large {
+        padding-left: ($gutter * 2);
+        padding-top: ($gutter * 1.5);
+    }
+
+    &--above-grid {
+        @include z-index(above-gridlines);
+    }
+
+    &__heading {
+        @include font-size(xs);
+
+        color: $color--dark-grey;
+        margin-bottom: $gutter * 0.5;
+
+        @include media-query(medium) {
+            margin-bottom: $gutter * 0.75;
+        }
+    }
+
+    &__list {
+        @include media-query(large) {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__tabs {
+        position: relative;
+        padding-top: 12px;
+
+        @include media-query(large) {
+            margin-right: $gutter;
+            padding-top: unset;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            height: 1px;
+            width: 11px;
+            background-color: $color--black-12;
+
+            @include media-query(large) {
+                content: none;
+            }
+        }
+    }
+
+    &__options {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__tab {
+        position: relative;
+        color: $color--dark-grey;
+        outline-width: initial;
+        transition: color $transition;
+
+        @include media-query(large) {
+            @include underline-hover-target();
+        }
+
+        &--reset {
+            display: inline-flex;
+            align-items: center;
+            color: $color--black;
+        }
+
+        &--selected {
+            color: $color--black;
+            font-weight: $weight--bold;
+
+            @include media-query(large) {
+                @include underline-hover-target();
+                @include underline-hover-target-reset();
+            }
+
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                right: -($gutter * 0.25);
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                overflow: hidden;
+                background-color: currentColor;
+            }
+        }
+
+        &:not(:last-child) {
+            margin-right: $gutter;
+        }
+
+        &[aria-selected='true'],
+        &:focus,
+        &:hover {
+            @include underline-hover-target-reset();
+            position: relative;
+            color: $color--black;
+        }
+    }
+
+    &__tab-label,
+    &__tab-icon {
+        pointer-events: none;
+    }
+
+    &__tab-icon {
+        @include media-query(large) {
+            display: none;
+        }
+    }
+
+    .filter-bar--stuck &,
+    .project-filters & {
+        @include z-index(sticky-nav-bar);
+
+        @include media-query(large) {
+            // Compensate padding to align to grid lines
+            transform: translate3d(-($gutter * 2), 0, 0);
+        }
+    }
+
+    .filter-bar--stuck & {
+        background-color: $color--black;
+
+        &__tab {
+            color: $color--meta-darkbg;
+
+            &.active {
+                color: $color--white;
+
+                &::before {
+                    background-color: $color--white;
+                }
+            }
+        }
+
+        &__heading {
+            display: none;
+        }
+    }
+
+    // When project filters are open
+    .project-filters & {
+        background-color: $color--white; // filter bar is always white
+
+        &__tab {
+            color: $color--meta-lightbg;
+
+            &.active {
+                color: $color--black;
+
+                &::before {
+                    background-color: $color--black;
+                }
+            }
+        }
+
+        &__heading {
+            @include media-query(large) {
+                position: absolute;
+                top: 34px;
+                left: -($gutter * 2);
+            }
+        }
+    }
+
+    // When small-medium breakpoints are open
+    .project-filters-mobile & {
+        padding-left: 0;
+        padding-top: (
+            ($gutter * 2) - 2
+        ); // align with heading on previous state
+
+        &__heading {
+            @include font-size(s);
+            font-weight: $weight--bold;
+            margin-bottom: ($gutter * 1.5);
+            color: $color--black;
+        }
+
+        &__options {
+            flex-direction: column;
+            padding-right: $gutter;
+        }
+
+        &__tab {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: $gutter;
+            color: $color--black;
+
+            &::after {
+                content: none;
+            }
+
+            &--selected {
+                &::before {
+                    content: none;
+                }
+
+                .categories-tablist__tab-label {
+                    @include underline-hover();
+                    @include underline-hover-target-reset();
+                    position: relative;
+                    color: $color--black;
+                    font-weight: $weight--bold;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: -($gutter * 0.5);
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        background-color: currentColor;
+                    }
+                }
+            }
+        }
+    }
+
+    .app--scholarship-listing & {
+        padding-left: 0;
+        margin-bottom: ($gutter * 2);
+
+        // Colours are quite confusing for this component as it has many states, overriding for the scholarship listing
+        &.bg--dark {
+            #{$root}__heading {
+                color: $color--light-grey;
+            }
+
+            #{$root}__tab {
+                color: $color--light-grey;
+
+                &--reset,
+                &--selected,
+                &[aria-selected='true'],
+                &:focus,
+                &:hover {
+                    color: $color--white;
+                }
+            }
+        }
+
+        &.bg--light {
+            #{$root}__heading {
+                color: $color--dark-grey;
+            }
+
+            #{$root}__tab {
+                color: $color--dark-grey;
+
+                &--reset,
+                &--selected,
+                &[aria-selected='true'],
+                &:focus,
+                &:hover {
+                    color: $color--black;
+                }
+            }
+        }
+    }
+
+    .app--scholarship-listing.project-filters & {
+        margin-bottom: 0;
+
+        #{$root}__options {
+            @include media-query(large) {
+                padding-left: ($gutter * 2);
+            }
+        }
+
+        // Overriding scholarship listing customisations when the filter takeover is active
+        #{$root}__heading {
+            color: $color--dark-grey;
+        }
+
+        #{$root}__tab {
+            color: $color--dark-grey;
+
+            &--reset,
+            &--selected,
+            &[aria-selected='true'],
+            &:focus,
+            &:hover {
+                color: $color--black;
+            }
+        }
+    }
+
+    .app--scholarship-listing.project-filters-mobile & {
+        background-color: $color--white;
+
+        // Overriding scholarship listing customisations when the filter takeover is active
+        #{$root}__heading {
+            color: $color--black;
+        }
+
+        #{$root}__tab {
+            color: $color--dark-grey;
+
+            &--reset,
+            &--selected,
+            &[aria-selected='true'],
+            &:focus,
+            &:hover {
+                color: $color--black;
+            }
+        }
+    }
+}

@@ -1,0 +1,889 @@
+.section {
+    $root: &;
+    $notch-height-small: 36px;
+    $notch-height-medium: 80px;
+    $notch-height-large: 100px;
+
+    &--top-space,
+    &--start {
+        padding-top: ($gutter * 2.5);
+
+        @include media-query(medium) {
+            padding-top: ($gutter * 3);
+        }
+
+        @include media-query(large) {
+            padding-top: ($gutter * 7);
+        }
+    }
+
+    &--top-space-large {
+        padding-top: ($gutter * 7.75);
+
+        @include media-query(medium) {
+            padding-top: ($gutter * 18.25);
+        }
+
+        @include media-query(large) {
+            padding-top: ($gutter * 12.5);
+        }
+    }
+
+    &--no-top-for-mobile {
+        padding-top: 0;
+
+        @include media-query(medium) {
+            padding-top: ($gutter * 18.25);
+        }
+
+        @include media-query(large) {
+            padding-top: ($gutter * 12.5);
+        }
+    }
+
+    &--top-space-small {
+        padding-top: ($gutter * 3.5);
+
+        @include media-query(medium) {
+            padding-top: ($gutter * 3.5);
+        }
+
+        @include media-query(large) {
+            padding-top: ($gutter * 5);
+        }
+    }
+
+    &--contact {
+        padding-top: ($gutter * 3.5);
+
+        @include media-query(medium) {
+            padding-top: ($gutter * 3.5);
+        }
+
+        @include media-query(large) {
+            padding-top: ($gutter * 12.5);
+        }
+    }
+
+    &--end {
+        padding-bottom: ($gutter * 2.5);
+
+        @include media-query(medium) {
+            padding-bottom: ($gutter * 3);
+        }
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 7);
+        }
+    }
+
+    &--above-grid {
+        @include z-index(above-gridlines);
+        position: relative;
+
+        // Make sure that grid lines can't be seen underneath the programme finder toggles
+        .programmes-results__wrapper & {
+            @include z-index(above-header-gridlines);
+        }
+    }
+
+    &--stat-block {
+        min-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        color: $color--white;
+        background-color: $color--black-65;
+
+        &::before {
+            @include z-index(under);
+            content: '';
+            background-image: var(
+                --stat-block-bg-image
+            ); // set inline in stat-block.html
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 100%;
+            will-change: transform;
+        }
+    }
+
+    &--before-fixed {
+        &::before {
+            position: fixed;
+        }
+    }
+
+    // Mask off this blocks grid lines on small and medium breakpoints
+    &--notch-mask {
+        position: relative;
+
+        &::after {
+            @include z-index(above-gridlines);
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: $notch-height-small;
+            width: 50%;
+
+            @include media-query(medium) {
+                height: $notch-height-medium;
+            }
+
+            @include media-query(large) {
+                display: none;
+                width: 55%;
+            }
+        }
+
+        &.bg--light {
+            &::after {
+                background-color: $color--black;
+            }
+        }
+
+        &.bg--dark {
+            &::after {
+                background-color: $color--white;
+            }
+        }
+    }
+
+    &--top-margin {
+        margin-top: ($gutter * 2.5);
+
+        @include media-query(medium) {
+            margin-top: ($gutter * 3);
+        }
+
+        @include media-query(large) {
+            margin-top: ($gutter * 7);
+        }
+    }
+
+    &--extra-margin-bottom {
+        @include media-query(medium) {
+            margin-bottom: $notch-height-medium;
+        }
+
+        @include media-query(large) {
+            margin-bottom: $notch-height-large;
+        }
+    }
+
+    &--extra-padding-bottom {
+        @include media-query(medium) {
+            padding-bottom: $notch-height-medium;
+        }
+
+        @include media-query(large) {
+            padding-bottom: $notch-height-large;
+        }
+    }
+
+    &--programme-toggles {
+        border-bottom: 1px solid $color--grid-line-dark;
+
+        @include media-query(large) {
+            border-top: 1px solid $color--grid-line-dark;
+        }
+    }
+
+    &__header {
+        &--bottom-space {
+            margin-bottom: ($gutter * 2);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 6);
+            }
+        }
+
+        &--bottom-space-small {
+            margin-bottom: ($gutter * 1.5);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 4);
+            }
+        }
+    }
+
+    &__heading {
+        // sass-lint:disable-block no-ids
+        grid-column: 1 / span 2;
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+        }
+
+        &--primary {
+            margin-bottom: ($gutter * 2);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 3.5);
+            }
+        }
+
+        &--secondary {
+            margin-bottom: ($gutter * 1.25);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 1.5);
+            }
+        }
+
+        &--tight {
+            @include media-query(large) {
+                max-width: 50%;
+            }
+        }
+
+        &--hidden {
+            @include hidden();
+        }
+
+        // Tab with different heading layout
+        /* stylelint-disable selector-max-id */
+        #tab-panel-apply & {
+            @include media-query(large) {
+                grid-column: 2 / span 1;
+            }
+        }
+        /* stylelint-enable selector-max-id */
+
+        // Template specific alterations
+        .app--short-course .programme-overview & {
+            @include media-query(large) {
+                grid-column: 3 / span 2;
+            }
+        }
+    }
+
+    &__notch {
+        padding: 0 20px;
+        background-color: $color--white;
+
+        @include media-query(medium) {
+            @include grid-layout();
+            background-color: transparent;
+        }
+
+        &--top {
+            margin-bottom: ($gutter * 4);
+
+            @include media-query(medium) {
+                margin-bottom: ($gutter * 4);
+            }
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 5);
+            }
+        }
+
+        &--transparent {
+            background-color: transparent;
+        }
+
+        &--small-med-only {
+            @include media-query(large) {
+                display: none;
+            }
+        }
+
+        &--large-only {
+            display: none;
+
+            @include media-query(large) {
+                display: grid;
+            }
+        }
+
+        .bg--stat-block & {
+            &:first-child {
+                #{$root}__notch-fill {
+                    background-color: $color--black; // Changed from black to white for API module removal
+
+                    &::before {
+                        background-color: $color--black; // Changed from black to white for API module removal
+                    }
+                }
+
+                #{$root}__notch-fill--light {
+                    background-color: $color--white; // Changed from black to white for API module removal
+
+                    &::before {
+                        background-color: $color--white; // Changed from black to white for API module removal
+                    }
+                }
+            }
+
+            &:last-child {
+                #{$root}__notch-fill {
+                    background-color: $color--white; // Changed from white to black for API module removal
+
+                    &::before {
+                        background-color: $color--white; // Changed from white to black for API module removal
+                    }
+                }
+
+                #{$root}__notch-fill--dark {
+                    background-color: $color--black; // Changed from black to white for API module removal
+
+                    &::before {
+                        background-color: $color--black; // Changed from black to white for API module removal
+                    }
+                }
+            }
+        }
+
+        .section--stat-block-notch-override & {
+            &:first-child {
+                #{$root}__notch-fill {
+                    background-color: $color--white;
+
+                    &::before {
+                        background-color: $color--white;
+                    }
+                }
+            }
+        }
+    }
+
+    &__notch-fill {
+        position: relative;
+        height: $notch-height-small;
+        grid-column: 1 / span 1;
+
+        @include media-query(medium) {
+            height: $notch-height-medium;
+        }
+
+        @include media-query(large) {
+            height: $notch-height-large;
+        }
+
+        &--content-height {
+            height: initial;
+        }
+
+        #{$root}__notch--opposite & {
+            grid-column: 1 / span 2;
+        }
+
+        &::before {
+            display: block;
+            position: absolute;
+            left: 1px;
+            top: 0;
+            height: 100%;
+            content: '';
+            width: 300%;
+            transform: translate3d(-100%, 0, 0);
+
+            #{$root}__notch--opposite & {
+                left: auto;
+                right: 1px;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        &--first-col {
+            #{$root}__notch--opposite & {
+                grid-column: 2 / span 1;
+            }
+
+            @include media-query(large) {
+                grid-column: 1 / span 1;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 5 / span 1;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc(var(--margin-width) * -1); // Make negative
+                    width: var(--margin-width);
+                }
+            }
+        }
+
+        &--second-col {
+            #{$root}__notch--opposite & {
+                grid-column: 2 / span 1;
+            }
+
+            @include media-query(large) {
+                grid-column: 1 / span 2;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 4 / span 2;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc((var(--margin-width)) * -1); // Make negative
+                    width: var(--margin-width);
+                }
+            }
+        }
+
+        &--second-col\@medium {
+            @include media-query(medium) {
+                #{$root}__notch--opposite & {
+                    grid-column: 2 / span 1;
+                }
+            }
+
+            @include media-query(large) {
+                grid-column: 1 / span 2;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 4 / span 2;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc(
+                        (var(--margin-width) + var(--outer-grid-width)) * -1
+                    ); // Make negative
+                    width: calc(var(--margin-width) + var(--outer-grid-width));
+                }
+            }
+        }
+
+        &--third-col {
+            #{$root}__notch--opposite & {
+                grid-column: 2 / span 1;
+            }
+
+            @include media-query(large) {
+                grid-column: 1 / span 3;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 3 / span 2;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc((var(--margin-width) * -1)); // Make negative
+                    width: calc(var(--margin-width));
+
+                    .programmes-categories & {
+                        background-color: $color--lighter-grey;
+                        width: 300%;
+                    }
+
+                    @include media-query(large) {
+                        right: calc(
+                            (var(--margin-width) + var(--outer-grid-width)) * -1
+                        ); // Make negative
+                        width: calc(
+                            var(--margin-width) + var(--outer-grid-width)
+                        );
+
+                        .programmes-categories & {
+                            background-color: $color--white;
+                            width: calc(
+                                var(--margin-width) + var(--outer-grid-width)
+                            );
+                        }
+                    }
+                }
+            }
+
+            &::after {
+                #{$root}__notch--opposite & {
+                    .programmes-categories & {
+                        @include media-query(large) {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            left: calc((var(--grid-width) * -1) - 1px);
+                            top: 0;
+                            width: 1px;
+                            background-color: $color--white-12;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--third-col-span-four {
+            #{$root}__notch--opposite & {
+                grid-column: 1 / span 12;
+
+                @include media-query(large) {
+                    grid-column: 3 / span 4;
+                }
+            }
+        }
+
+        &--third-col-two-span-four {
+            @include media-query(large) {
+                grid-column: 2 / span 3;
+            }
+        }
+
+        &--fourth-col {
+            @include media-query(large) {
+                grid-column: 1 / span 4;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 2 / span 3;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc((var(--margin-width) * -1)); // Make negative
+                    width: calc(var(--margin-width));
+
+                    @include media-query(large) {
+                        right: calc(
+                            (var(--margin-width) + var(--outer-grid-width)) * -1
+                        ); // Make negative
+                        width: calc(
+                            var(--margin-width) + var(--outer-grid-width)
+                        );
+                    }
+                }
+            }
+        }
+
+        &--fourth-col-span-four {
+            #{$root}__notch--opposite & {
+                @include media-query(large) {
+                    grid-column: 2 / span 4;
+                }
+            }
+        }
+
+        &--fifth-col {
+            @include media-query(large) {
+                grid-column: 1 / span 5;
+
+                #{$root}__notch--opposite & {
+                    grid-column: 1 / span 3;
+                }
+            }
+
+            &::before {
+                #{$root}__notch--opposite & {
+                    right: calc((var(--margin-width) * -1)); // Make negative
+                    width: calc(var(--margin-width));
+
+                    @include media-query(large) {
+                        right: calc(
+                            (
+                                    var(--margin-width) + var(--grid-width) +
+                                        var(--outer-grid-width)
+                                ) * -1
+                        ); // Make negative
+                        width: calc(
+                            var(--margin-width) + var(--grid-width) +
+                                var(--outer-grid-width)
+                        );
+                    }
+                }
+            }
+        }
+
+        .bg--dark &:not(&--light):not(&--dark) {
+            background-color: $color--white;
+
+            &::before {
+                background-color: $color--white;
+            }
+        }
+
+        .bg--light &:not(&--light):not(&--dark) {
+            background-color: $color--black;
+
+            &::before {
+                background-color: $color--black;
+            }
+        }
+
+        &--light {
+            background-color: $color--white;
+
+            &::before {
+                background-color: $color--white;
+            }
+        }
+
+        &--dark {
+            background-color: $color--black;
+
+            &::before {
+                background-color: $color--black;
+            }
+        }
+
+        .programmes-categories & {
+            margin-bottom: -1px; // prevent background from leaking through
+        }
+    }
+
+    &__row {
+        &--first {
+            padding-top: ($gutter * 3);
+
+            @include media-query(large) {
+                padding-top: ($gutter * 6);
+            }
+        }
+
+        &--first-small {
+            padding-top: ($gutter * 2);
+
+            @include media-query(large) {
+                padding-top: ($gutter * 4);
+            }
+        }
+
+        &--first-small-med-bp {
+            padding-top: ($gutter * 4);
+
+            @include media-query(large) {
+                padding-top: 0;
+            }
+        }
+
+        &--first-extra-small {
+            padding-top: ($gutter * 0.25);
+
+            @include media-query(large) {
+                padding-top: ($gutter * 0.5);
+            }
+        }
+
+        &--first-large {
+            padding-top: ($gutter * 3.5);
+
+            @include media-query(large) {
+                padding-top: ($gutter * 11);
+            }
+        }
+
+        &--last {
+            padding-bottom: ($gutter * 3);
+
+            @include media-query(large) {
+                padding-bottom: ($gutter * 6);
+            }
+        }
+
+        &--last-small {
+            padding-bottom: ($gutter * 2);
+
+            @include media-query(large) {
+                padding-bottom: ($gutter * 4);
+            }
+        }
+
+        &--last-extra-small {
+            padding-bottom: ($gutter * 1);
+
+            @include media-query(large) {
+                padding-bottom: ($gutter * 2);
+            }
+        }
+
+        &--last-large {
+            padding-bottom: ($gutter * 3.5);
+
+            @include media-query(large) {
+                padding-bottom: ($gutter * 11);
+            }
+        }
+    }
+
+    &__action {
+        grid-column: 1 / span 2;
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+        }
+    }
+
+    &__sticky-placeholder {
+        @include media-query(medium) {
+            height: ($gutter * 10);
+        }
+
+        @include media-query(large) {
+            height: $notch-height-large;
+        }
+    }
+
+    // Custom grid lines for categories-panels
+    &.opportunities-to-work {
+        #{$root}__heading {
+            position: relative;
+            left: -1px; // align with gridline
+            max-width: 500px;
+
+            // Convert margin to padding to allow for connecting border
+            &--primary {
+                margin-bottom: 0;
+                padding-bottom: ($gutter * 2);
+
+                @include media-query(large) {
+                    margin-bottom: 0;
+                    padding-bottom: ($gutter * 3.5);
+                }
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: -1px;
+                top: -300px;
+                height: 300px;
+                width: 1px;
+            }
+        }
+
+        #{$root}__notch-fill {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: $notch-height-small;
+                width: 1px;
+
+                @include media-query(medium) {
+                    height: $notch-height-medium;
+                }
+
+                @include media-query(large) {
+                    height: $notch-height-large;
+                    left: calc(var(--grid-width) - 1px);
+                }
+            }
+        }
+
+        &.bg--light {
+            #{$root}__heading {
+                border-left: 1px solid $color--grid-line-dark;
+
+                &::before {
+                    background-color: $color--grid-line-dark;
+                }
+            }
+
+            #{$root}__notch-fill {
+                &::after {
+                    // opposite as sitting on notch
+                    background-color: $color--grid-line-light;
+                }
+            }
+        }
+
+        &.bg--dark {
+            #{$root}__heading {
+                border-left: 1px solid $color--grid-line-light;
+
+                &::before {
+                    background-color: $color--grid-line-light;
+                }
+            }
+
+            #{$root}__notch-fill {
+                &::after {
+                    // opposite as sitting on notch
+                    background-color: $color--grid-line-dark;
+                }
+            }
+        }
+    }
+
+    // Research spaces custom spacing
+    &.research-top .research-spaces,
+    &.landing-page__middle .research-spaces {
+        #{$root}__header {
+            margin-bottom: ($gutter * 1.5);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 4);
+            }
+        }
+    }
+
+    &.landing-page__middle .research-spaces {
+        #{$root}__heading {
+            margin-bottom: ($gutter * 2);
+        }
+
+        #{$root}__introduction {
+            margin-bottom: ($gutter * 2);
+            grid-column: 1 / span 2;
+
+            @include media-query(large) {
+                grid-column: auto;
+            }
+        }
+    }
+
+    // Black sections either side of stat block
+    &.section--both-dark {
+        #{$root}__notch {
+            &:last-child {
+                #{$root}__notch-fill {
+                    background-color: $color--black;
+
+                    &::before {
+                        background-color: $color--black;
+                    }
+                }
+            }
+        }
+    }
+
+    &.section--light-to-dark {
+        #{$root}__notch {
+            &:last-child {
+                #{$root}__notch-fill {
+                    background-color: $color--black;
+
+                    &::before {
+                        background-color: $color--black;
+                    }
+                }
+            }
+
+            &:first-child {
+                #{$root}__notch-fill {
+                    background-color: $color--white;
+
+                    &::before {
+                        background-color: $color--white;
+                    }
+                }
+            }
+        }
+    }
+
+    &--transparent {
+        #{$root}__notch {
+            background-color: transparent;
+        }
+    }
+}

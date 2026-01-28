@@ -1,0 +1,93 @@
+.featured-alumni {
+    $root: &;
+
+    &__heading {
+        grid-column: 1 / span 2;
+        margin-bottom: ($grid * 1.5);
+
+        @include media-query(medium) {
+            margin-bottom: ($grid * 2.5);
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+        }
+    }
+
+    &__introduction {
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 2);
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+            grid-row: 2;
+        }
+
+        @include media-query(large) {
+            grid-column: 3 / span 1;
+            grid-row: auto;
+            margin-top: ($gutter * 3);
+        }
+    }
+
+    &__body {
+        @include font-size(xs);
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 2); // Added for API module removal
+        // margin-bottom: ($gutter * 3); // Removed for API module removal
+
+        @include media-query(medium) {
+            grid-column: 2 / span 1;
+            grid-row: 2;
+            margin-top: ($gutter * 1.5);
+        }
+
+        @include media-query(large) {
+            grid-column: 4 / span 1;
+            grid-row: 1;
+            margin-top: ($gutter * 5);
+            margin-bottom: ($grid * 8); // Added for API module removal
+        }
+    }
+
+    &__list {
+        @include font-size(xs);
+
+        li {
+            margin-bottom: ($gutter * 0.3);
+
+            .link {
+                font-family: unset;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__list {
+            a {
+                color: $color--meta-darkbg;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    color: $color--white;
+                }
+            }
+        }
+    }
+
+    .bg--light & {
+        #{$root}__list {
+            a {
+                color: $color--meta-lightbg;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    color: $color--black;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+context:
+  item:
+    meta: 'Event'
+    title: 'Show 2019: School of Architecture'
+    summary: '28-29 April'
+    image: true
+    link: '#'
+
+tags:
+  image:
+    item.image fill-80x80 as image_small:
+      target_var: image_small
+      raw:
+        url: '//placekitten.com/80/80'
+    item.image fill-554x554 as image_large:
+      target_var: image_large
+      raw:
+        url: '//placekitten.com/554/554'
+        width: '554'
+        height: '554'

@@ -1,0 +1,187 @@
+context:
+  page:
+    title: Research at the RCA
+    get_ancestors:
+      - is_root: false
+        depth: 2
+        title: Research
+    introduction: 'The Royal College of Art excels in world-leading design and art research and creative innovation.'
+    about_page:
+      title: Read more about research
+    page_list_title: Research centres & schools
+    related_research_centres_schools:
+      - item:
+        title: Research centres
+        related_items:
+          - item:
+            title: The Helen Hamlyn Centre for Design
+            programme_description_subtitle: Design research and projects with industry that contribute to improving people's lives.
+            img: http://placehold.it/300x270/fff/000
+          - item:
+            title: HELIX Centre
+            programme_description_subtitle: Bringing together design researchers and clinical staff to tackle the big demands in healthcare today.
+            img: http://placehold.it/300x270/ff5d1c/fff
+          - item:
+            title: Intelligent Mobility Design Centre
+            programme_description_subtitle: Leading research at the intersection of people, mobility and technology within a complex and changing urban and global environment.
+          - item:
+            title: RCA Robotics Laboratory
+            programme_description_subtitle: Developing new robotic technologies enhancing access, safety and performance in a wide range of industrial applications.
+            img: http://placehold.it/300x270/ff5d1c/fff
+          - item:
+            title: Materials Science Research Centre
+            programme_description_subtitle: Design-led disruptive research environment to develop new approaches to innovation in materials and applications.
+            img: http://placehold.it/300x270
+      - item:
+        title: Schools
+        related_items:
+          - item:
+            title: School of Architecture
+            programme_description_subtitle: Taught and research degrees in the spatial disciplines, from RIBA-validated part II architecture to urban, environmental and interior design practices.
+            img: http://placehold.it/300x270/fff/000
+          - item:
+            title: School of Communication
+            programme_description_subtitle: The expanded field of communication spans visual disciplines of animation, graphic design and illustration as well as experimental sound, code, text, space, event and experience design.
+            img: http://placehold.it/300x270/ff5d1c/fff
+          - item:
+            title: School of Arts & Humanities
+            programme_description_subtitle: Develop your own practice and career as an artist, maker, historian, theorist, writer and curator.
+            img: http://placehold.it/300x270
+          - item:
+            title: School of Design
+            programme_description_subtitle: Design courses and degrees in specialising in product design to AR and AV, and from the design of specific objects and products to interactions, systems and policies.
+            img: http://placehold.it/300x270
+    cta_block:
+      - block:
+        value:
+          title: Our research staff
+          description: Our research staff span a broad range of subjects and areas of expertise.
+          action: Visit all research staff
+          link: '#'
+    news: false
+    legacy_news_and_events:
+      - item:
+        type: 'News'
+        title: 'Show 2018: School of Architecture: Making Space for the Future (legcay example)'
+        date: '23 November 2019'
+        link: '#'
+        image: //placekitten.com/500/500
+        person: false
+      - item:
+        type: 'Event'
+        title: 'Designs for Real Life (legcay example)'
+        date: '6 July 2019 — 4 August 2019'
+        link: '#'
+        image: //placekitten.com/500/500
+        person: false
+      - item:
+        type: 'Event'
+        title: 'Redefining Boundaries: Architecture Work-in-progress 2019 (legcay example)'
+        date: '23 November 2019'
+        link: '#'
+        image: //placekitten.com/500/500
+        person: false
+    contact: true
+    contact_model_image: true
+  related_pages_highlights:
+    - slide:
+      meta: 'School of Design'
+      title: 'Advanced Taxi for London'
+      description: 'How innovative and disruptive technologies can address the world’s most intractable challenges'
+      image: true
+      link: '#'
+    - slide:
+      meta: 'Alumni Story'
+      title: 'A place with a real focus on making'
+      description: 'Since graduating from the RCA, Holly Hendry’s site-responsive sculptures and installations have been exhibited at galleries in London, Liverpool, Manchester, Copenhagen and Berlin. '
+      image: true
+      link: '#'
+    - slide:
+      meta: 'Alumni Story'
+      title: 'Designing the imposible for NASA'
+      description: 'Creating world class experiences that started at the RCA'
+      image: true
+      link: '#'
+  highlights_title: Enterprise highlights
+  highlights_link_text: '#'
+  page_list:
+    - item:
+      title: Lorem Ipsum
+      link:
+        url: '#'
+        title: View all executive education courses
+      related_items:
+        - item:
+          title: Design Thinking & Innovation
+          degree_level: Executive Education
+          programme_description_subtitle: Transform your Customer Experience.
+          img: http://placehold.it/300x270/fff/000
+        - item:
+          title: Service Design Masterclass
+          degree_level: Executive Education
+          programme_description_subtitle: Learn how Creative Leadership can unlock your potential for innovation.
+          img: http://placehold.it/300x270/ff5d1c/fff
+        - item:
+          title: Creative Leadership
+          degree_level: Executive Education
+          programme_description_subtitle: Turning innovation into successful real-world businesses.
+          img: http://placehold.it/300x270
+    - item:
+      title: Lorem Ipsum
+      link:
+        url: '#'
+        title: View all executive education courses
+      related_items:
+        - item:
+          title: Design Thinking & Innovation
+          degree_level: Executive Education
+          programme_description_subtitle: Transform your Customer Experience.
+          img: http://placehold.it/300x270/fff/000
+        - item:
+          title: Service Design Masterclass
+          degree_level: Executive Education
+          programme_description_subtitle: Learn how Creative Leadership can unlock your potential for innovation.
+          img: http://placehold.it/300x270/ff5d1c/fff
+        - item:
+          title: Creative Leadership
+          degree_level: Executive Education
+          programme_description_subtitle: Turning innovation into successful real-world businesses.
+          img: http://placehold.it/300x270
+  featured_image:
+    title: Research degrees
+    subtitle: Join a thriving community of more than 250 MPhil and PhD students
+    description: Pursue cutting-edge research at the world's leading postgraduate university for art & design.
+    get_link_text: Read more
+    get_link_url: '#'
+  slideshow_block:
+    title: Research at the RCA
+    summary: We work with a selection of the world's most innovative organisations.
+    slides:
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'RCA x CERN'
+          summary: 'Exploring how science, technology and design can propose solutions for international sustainability challenges.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Research'
+          title: 'Burberry'
+          summary: 'Promote a design-led disruptive research environment to develop new approaches to innovation in materials and applications.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'Designing the imposible for NASA'
+          summary: 'Creating world class experiences that started at the RCA'
+          link: '#'
+          person: false
+          image: True
+tags:
+  pageurl:
+    page.about_page:
+      raw: '#'

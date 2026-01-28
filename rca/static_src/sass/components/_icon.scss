@@ -1,0 +1,10 @@
+.icon {
+    width: 20px;
+    height: 20px;
+    transition: fill $transition;
+    fill: $color--primary;
+
+    &:hover {
+        fill: darken($color--primary, 20%);
+    }
+}

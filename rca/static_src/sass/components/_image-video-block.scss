@@ -1,0 +1,163 @@
+.image-video-block {
+    $root: &;
+    padding-bottom: ($gutter * 4);
+
+    @include media-query(medium) {
+        padding-bottom: ($gutter * 6);
+    }
+
+    &--no-padding {
+        padding-bottom: 0;
+    }
+
+    &--tight-heading {
+        #{$root}__heading {
+            @include media-query(large) {
+                grid-column: 2 / span 1;
+            }
+        }
+    }
+
+    &--overlap-heading {
+        #{$root}__heading {
+            @include media-query(large) {
+                max-width: 70%;
+            }
+        }
+    }
+
+    &--small-bottom-margin {
+        @include media-query(medium) {
+            padding-bottom: ($gutter);
+        }
+    }
+
+    &__heading {
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 1.25);
+
+        @include media-query(medium) {
+            grid-column: 1 / span 2;
+            margin-bottom: ($gutter * 1.75);
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    &__copy,
+    &__subheading {
+        grid-column: 1 / span 2;
+    }
+
+    &__subheading {
+        margin-bottom: $gutter;
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+            margin-bottom: 0;
+            padding-right: $gutter;
+        }
+
+        @include media-query(large) {
+            grid-column: 3 / span 1;
+        }
+
+        &--mobile {
+            margin-bottom: ($gutter * 2);
+
+            @include media-query(medium) {
+                display: none;
+            }
+        }
+
+        &--tablet {
+            display: none;
+
+            @include media-query(medium) {
+                display: block;
+            }
+        }
+    }
+
+    &__school {
+        display: none;
+        text-transform: uppercase;
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 0.5);
+        letter-spacing: 0.05em;
+
+        @include media-query(medium) {
+            display: block;
+            grid-column: 1 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 3 / span 1;
+        }
+
+        &--mobile {
+            display: block;
+
+            @include media-query(medium) {
+                display: none;
+            }
+        }
+    }
+
+    &__copy {
+        &--meta-heading {
+            font-weight: $weight--bold;
+            margin-bottom: ($gutter * 0.5);
+        }
+
+        @include media-query(medium) {
+            grid-column: 2 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 4 / span 1;
+        }
+    }
+
+    &__meta {
+        grid-column: 1 / span 2;
+
+        @include media-query(medium) {
+            grid-column: 2 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 4 / span 1;
+        }
+    }
+
+    .programme-overview &,
+    .research-centre-overview &,
+    .app--project-detail &,
+    .app--project-listing & {
+        padding-bottom: 0;
+    }
+
+    .bg--dark & {
+        #{$root}__copy--meta-copy {
+            color: $color--meta-darkbg;
+        }
+
+        #{$root}__school {
+            color: $color--white;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__copy--meta-copy {
+            color: $color--meta-lightbg;
+        }
+
+        #{$root}__school {
+            color: $color--black;
+        }
+    }
+}

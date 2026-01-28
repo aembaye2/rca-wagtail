@@ -1,0 +1,41 @@
+<div class="section__row grid facilities">
+    <h2 class="facilities__heading heading heading--four">{{ title }}</h2>
+    {% with facilities_snippet=page.facilities_snippet %}
+        <div class="facilities__introduction">
+            {% if facilities_snippet.introduction %}
+                <p class="introduction">{{ facilities_snippet.introduction }}</p>
+            {% endif %}
+            {% if facilities_snippet.link_url %}
+                <a href="{{ facilities_snippet.link_url }}" class="facilities__view-all facilities__view-all--medium body body--one link link--primary link--link">
+                    <span class="link__label">{{ facilities_snippet.link_title }}</span>
+                    <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                </a>
+            {% endif %}
+        </div>
+        {% if facilities_snippet.link_url %}
+            <div class="facilities__action">
+                <a href="{{ facilities_snippet.link_url }}" class="facilities__view-all body body--one link link--primary link--link">
+                    <span class="link__label">{{ facilities_snippet.link_title }}</span>
+                    <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                </a>
+            </div>
+        {% endif %}
+        {% if facilities_snippet.copy %}
+        <div class="facilities__body">
+            {{ facilities_snippet.copy|linebreaks }}
+        </div>
+     {% endif %}
+    {% endwith %}
+</div>
+
+{% if page.vepple_post_id %}
+<div class="section__row grid">
+    <div class="facilities__vepple embed embed--vepple layout layout__start_one layout__span-two layout__@large-start-two layout__@large-span-three">
+        <vepple-tour loader="false" id="{{ page.vepple_post_id }}" url="{{ vepple_api_url }}"></vepple-tour> 
+    </div>
+</div>
+{% endif %}
+
+<div class="section__row facilities__slideshow {% if alumni_links %}{% else %}facilities__slideshow--bottom-padding{% endif %}">
+    {% include "patterns/organisms/slideshow/slideshow.html" with slideshow=page.facilities_gallery control_title="Facilities slideshow" modifier=slideshowModifier %}
+</div>

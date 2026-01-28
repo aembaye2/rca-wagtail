@@ -1,0 +1,47 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="card{% if item.image %} card--image{% endif %}{% if item.person %} card--person{% endif %}{% if modifier %} card--{{ modifier }}{% endif %}">
+    {% if item.image %}
+        {% image item.image fill-80x46 as image_small %}
+        {% image item.image fill-828x472 as image_large %}
+    {% endif %}
+    <{% if item.link %}a href="{{ item.link }}"{% else%}div{% endif %} class="card__container {% if item.link %}u-offset-outline{% endif %}">
+        {% if item.link and item.image %}<div class="card__image-container">{% endif %}
+            {% if item.image %}
+                {% include "patterns/atoms/image/image--lazyload.html" with image_small=image_small width=828 height=472 image_large=image_large classList='card__image' %}
+            {% endif %}
+        {% if item.link and item.image %}</div>{% endif %}
+        <div class="card__content-container">
+            <div class="card__content">
+                {% if item.meta %}
+                    <div class="card__meta">{{ item.meta }}</div>
+                {% endif %}
+                <h4 class="card__heading">
+                    {% if item.link %}
+                        <span class="card__heading-link">
+                            {{ item.title }}
+                            {% if link_style  == "with-arrow" %}
+                            <svg class="card__heading-link-icon" width="12" height="8" aria-hidden="true">
+                                <use xlink:href="#arrow"></use>
+                            </svg>
+                            {% endif %}
+                        </span>
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                </h4>
+                {% if item.description %}
+                    <div class="card__description">{{ item.description|safe }}</div>
+                {% endif %}
+            </div>
+            {% if item.person %}
+                <div class="card__person">
+                    {% image person.image fill-60x60 class="card__person-image" %}
+                    <div class="card__person-info">
+                        <div class="card__person-meta">Featuring</div>
+                        <h4 class="card__person-title">{{ item.person.title }}</h4>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </{% if item.link %}a{% else %}div{% endif %}>
+</div>

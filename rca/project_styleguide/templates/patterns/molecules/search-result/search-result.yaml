@@ -1,0 +1,12 @@
+context:
+  result:
+    title: Page title
+    listing_meta: Event
+    listing_title: Listing title
+    listing_summary: Listing summary
+    search_description: Search description
+
+tags:
+  pageurl:
+    result:
+      raw: '#'

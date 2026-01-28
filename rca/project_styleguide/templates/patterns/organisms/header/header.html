@@ -1,0 +1,21 @@
+{% load wagtailcore_tags navigation_tags %}
+<div class="header">
+
+    <div class="header__container grid">
+
+        <div class="header__logo">
+            {% include 'patterns/atoms/logo/logo.html' %}
+        </div>
+
+        <div class="header__navigation-toggle">
+            {% include 'patterns/molecules/menu-toggle/menu-toggle.html' %}
+            {% include 'patterns/molecules/search-toggle/search-toggle.html' %}
+        </div>
+
+        {% audience_links as links %}
+        {% for value in links %}
+            {% include 'patterns/atoms/audience-nav-item/audience-nav-item.html' %}
+        {% endfor %}
+    </div>
+
+</div>

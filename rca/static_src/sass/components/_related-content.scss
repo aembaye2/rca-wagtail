@@ -1,0 +1,390 @@
+.related-content {
+    $root: &;
+    position: relative;
+    padding-top: ($gutter * 4);
+    padding-bottom: ($gutter * 6);
+
+    &--large {
+        #{$root}__degree {
+            margin-bottom: ($gutter * 2);
+        }
+
+        #{$root}__listing {
+            position: relative;
+        }
+
+        #{$root}__meta,
+        #{$root}__copy {
+            // target first and second items
+            &:nth-child(-n + 2) {
+                border-top: 0;
+            }
+        }
+
+        #{$root}__meta {
+            grid-column: 1 / span 2;
+
+            @include media-query(large) {
+                grid-column: 2 / span 1;
+            }
+        }
+
+        #{$root}__copy {
+            grid-column: 1 / span 2;
+            padding-top: ($gutter * 0.25);
+
+            @include media-query(medium) {
+                grid-column: 2 / span 1;
+                padding-top: $gutter;
+            }
+
+            @include media-query(large) {
+                grid-column: 3 / span 1;
+            }
+        }
+
+        #{$root}__group {
+            position: relative;
+        }
+
+        #{$root}__image-container {
+            @include z-index(above-gridlines);
+            position: absolute;
+            right: var(--margin-width);
+            top: 0;
+            width: calc(var(--grid-width) + var(--outer-grid-width));
+
+            &::before {
+                content: '';
+                display: block;
+                padding-top: 100%;
+            }
+        }
+
+        #{$root}__image {
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    &--sticky {
+        #{$root}__image-container {
+            height: 100%;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        #{$root}__image {
+            position: sticky;
+        }
+    }
+
+    &--after-action {
+        padding-bottom: 0;
+    }
+
+    &--meta-new-line {
+        #{$root}__subheading {
+            padding-bottom: $gutter;
+
+            @include media-query(medium) {
+                padding-bottom: 0;
+            }
+        }
+
+        #{$root}__meta {
+            grid-column: 1 / span 2;
+            flex-direction: column;
+
+            @include media-query(medium) {
+                grid-column: 1 / span 1;
+            }
+
+            @include media-query(large) {
+                grid-column: 2 / span 1;
+            }
+        }
+
+        #{$root}__title {
+            margin-bottom: ($gutter * 0.5);
+
+            @include media-query(medium) {
+                margin-bottom: ($gutter * 0.25);
+            }
+        }
+
+        #{$root}__degree {
+            margin-bottom: ($gutter * 0.5);
+
+            @include media-query(medium) {
+                margin-bottom: $gutter;
+            }
+        }
+    }
+
+    &--small-margin-mobile {
+        padding-bottom: ($gutter * 2);
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 6);
+        }
+
+        #{$root}__group {
+            margin-bottom: ($gutter * 2);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 3);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+
+                @include media-query(large) {
+                    margin-bottom: ($gutter * 3);
+                }
+            }
+        }
+    }
+
+    &__group {
+        margin-bottom: ($gutter * 3);
+
+        @include media-query(large) {
+            min-height: 450px;
+        }
+    }
+
+    &__listing {
+        position: relative;
+    }
+
+    &__heading,
+    &__subheading {
+        grid-column: 1 / span 2;
+
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+        }
+    }
+
+    &__heading {
+        margin-bottom: ($gutter * 3);
+    }
+
+    &__subheading {
+        margin-bottom: $gutter;
+    }
+
+    &__link {
+        display: inline-block;
+        color: $color--black;
+
+        #{$root}__icon {
+            display: none;
+
+            @include media-query(medium) {
+                display: inline;
+                margin-top: 8px;
+                transform: rotate(-45deg) translate3d(0, 0, 0);
+            }
+        }
+
+        &:hover,
+        &:focus {
+            #{$root}__link-text {
+                @include underline-hover-target-reset();
+                color: inherit;
+            }
+        }
+    }
+
+    &__link-text {
+        @include underline-hover-target();
+    }
+
+    &__copy {
+        grid-column: 1 / span 2;
+        padding-bottom: calc($gutter / 0.75);
+
+        &:last-of-type {
+            border-bottom: 0;
+        }
+
+        @include media-query(medium) {
+            grid-column: auto;
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: row;
+
+        @include media-query(medium) {
+            flex-direction: column;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+        }
+    }
+
+    &__copy,
+    &__meta {
+        @include media-query(medium) {
+            padding-top: $gutter;
+            padding-right: $gutter;
+        }
+    }
+
+    &__image-container {
+        display: none;
+        grid-column: 4 / span 1;
+
+        @include media-query(large) {
+            position: absolute;
+            top: 0;
+            right: calc(var(--margin-width) + var(--outer-grid-width));
+            display: block;
+            width: var(--grid-width);
+        }
+    }
+
+    &__image {
+        max-height: 270px;
+        object-fit: cover;
+        opacity: 0;
+        width: 100%;
+        height: auto;
+        margin-bottom: ($gutter);
+        transition: opacity $transition;
+
+        &.is-visible {
+            opacity: 1;
+        }
+    }
+
+    &__title {
+        margin-bottom: ($gutter * 0.25);
+        margin-right: ($gutter * 0.25);
+
+        @include media-query(medium) {
+            margin-right: 0;
+        }
+    }
+
+    &__degree {
+        margin-bottom: ($gutter * 0.25);
+    }
+
+    &__action {
+        margin-top: ($gutter * 1.5);
+    }
+
+    .app--short-course & {
+        @include media-query(large) {
+            padding-top: ($gutter * 8);
+        }
+    }
+
+    .bg--light & {
+        #{$root}__copy {
+            border-bottom: 1px solid $color--grid-line-dark;
+
+            @include media-query(medium) {
+                border-bottom: 0;
+            }
+        }
+
+        #{$root}__copy,
+        #{$root}__meta {
+            @include media-query(medium) {
+                border-top: 1px solid $color--grid-line-dark;
+            }
+        }
+
+        #{$root}__degree {
+            color: $color--dark-grey;
+        }
+
+        #{$root}__icon {
+            fill: $color--black;
+        }
+
+        &--large {
+            #{$root}__copy {
+                border-top: 0;
+
+                @include media-query(medium) {
+                    border-top: 1px solid $color--grid-line-dark;
+                }
+            }
+        }
+
+        &--meta-new-line {
+            #{$root}__subheading {
+                border-bottom: 1px solid $color--grid-line-dark;
+
+                @include media-query(medium) {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__copy {
+            border-bottom: 1px solid $color--grid-line-light;
+
+            @include media-query(medium) {
+                border-bottom: 0;
+            }
+        }
+
+        #{$root}__copy,
+        #{$root}__meta {
+            @include media-query(medium) {
+                border-top: 1px solid $color--grid-line-light;
+            }
+        }
+
+        #{$root}__degree {
+            color: $color--light-grey;
+        }
+
+        #{$root}__icon {
+            fill: $color--white;
+        }
+
+        #{$root}__link {
+            color: $color--white;
+        }
+
+        &--large {
+            #{$root}__copy {
+                border-top: 0;
+
+                @include media-query(medium) {
+                    border-top: 1px solid $color--grid-line-light;
+                }
+            }
+        }
+
+        &--meta-new-line {
+            #{$root}__subheading {
+                border-bottom: 1px solid $color--grid-line-light;
+
+                @include media-query(medium) {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}

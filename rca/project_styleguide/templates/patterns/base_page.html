@@ -1,0 +1,55 @@
+{% extends "patterns/base.html" %}
+
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+
+{% block title %}{{ page.meta_title }}{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+
+{% block meta_tags %}
+    {% comment %}
+        Twitter summary card - see https://dev.twitter.com/cards/types/summary
+        and https://dev.twitter.com/cards/getting-started
+    {% endcomment %}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
+    <meta name="twitter:title" content="{{ page.title }}" />
+    <meta name="twitter:description" content="{{ page|social_text:request.site }}">
+    {% wagtail_site as current_site %}
+    {% if page.social_image  %}
+        {% image page.social_image fill-1200x1200 as social_img %}
+        <meta name="twitter:image" content="{{ social_img.full_url }}">
+    {% else %}
+        <meta name="twitter:image" content="{{ current_site.root_url }}{% static "images/social.png" %}">
+    {% endif %}
+
+    {# facebook opengraph tags #}
+    <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ page.url }}" />
+    <meta property="og:title" content="{{ page.title }}" />
+    {% if page.social_image %}
+        <meta property="og:image" content="{{ social_img.full_url }}" />
+    {% else %}
+        <meta name="og:image" content="{{ current_site.root_url }}{% static "images/social.png" %}">
+    {% endif %}
+    <meta property="og:description" content="{{ page|social_text:request.site }}" />
+    <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
+{% endblock meta_tags %}
+
+{% block body_top %}
+    {% if page.has_vepple_panorama %}
+        <script async type="module" src="https://rv-vepple-tour.web.app/vepple-tour.min.js"></script>
+    {% endif %}
+{% endblock body_top %}
+
+{% block header %}
+
+    {% include 'patterns/organisms/header/header.html' %}
+
+{% endblock header %}
+
+{% block footer %}
+
+    {% include 'patterns/organisms/footer/footer.html' %}
+
+{% endblock footer %}

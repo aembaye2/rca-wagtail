@@ -1,0 +1,83 @@
+.modal-launcher {
+    $root: &;
+    display: inline-block;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-top: 4px solid $color--tertiary;
+        transition: border-color $transition-cubic;
+    }
+
+    &__label {
+        @include font-size(xs);
+        position: relative;
+        font-weight: $weight--bold;
+        color: $color--white;
+        padding: ($gutter * 0.5) $gutter ($gutter * 0.5) 0;
+    }
+
+    &__icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: ($gutter * 2.25);
+        background-color: $color--tertiary;
+        transition: background-color $transition-cubic;
+    }
+
+    &__icon {
+        fill: $color--white;
+        width: 18px;
+        height: 18px;
+        transform: rotate(-45deg);
+        transition: fill $transition-cubic;
+    }
+
+    &:hover {
+        #{$root}__container {
+            border-top: 4px solid $color--white;
+        }
+
+        #{$root}__icon-container {
+            background-color: $color--white;
+        }
+
+        #{$root}__icon {
+            fill: $color--tertiary;
+        }
+    }
+
+    .booking-bar & {
+        @include media-query(large) {
+            width: 100%;
+        }
+    }
+    .app--scholarship-listing & {
+        @include media-query(large) {
+            width: 100%;
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__label {
+            color: $color--white;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__label {
+            color: $color--black;
+        }
+    }
+
+    /* Template specific */
+    .app--event-detail & {
+        width: 100%;
+    }
+}

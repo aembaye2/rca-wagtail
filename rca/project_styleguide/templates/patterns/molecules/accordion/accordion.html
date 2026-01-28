@@ -1,0 +1,68 @@
+{% load wagtailcore_tags %}
+<div class="accordion {% if modifier %}accordion--{{ modifier }}{% endif %} {% if accordion.preview_text %}accordion--with-preview{% endif %}" role="tablist" data-accordion>
+    <a
+        href="#"
+        role="tab"
+        class="accordion__link {% if preview %}accordion__link--with-preview{% endif %}"
+        data-accordion-question
+        aria-controls="answer-{{ accordion_id }}-{{ forloop.counter }}"
+        aria-expanded="false"
+        aria-selected="false"
+        tabindex="0"
+        id="question-{{ accordion_id }}-{{ forloop.counter }}"
+    >
+        <{% if heading_override %}{{ heading_override }}{% else %}h5{% endif %} class="accordion__heading heading heading--five">{{ accordion.heading }}</{% if heading_override %}{{ heading_override }}{% else %}h5{% endif %}>
+
+        <div class="accordion__meta">
+            {% if accordion.preview_text %}
+                <p class="accordion__preview-text body body--one">{{ accordion.preview_text }}</p>
+            {% endif %}
+            <svg width="18" height="18" class="accordion__icon accordion__icon--plus" aria-hidden="true">
+                <use xlink:href="#plus"></use>
+            </svg>
+            <svg width="18" height="18" class="accordion__icon accordion__icon--minus" aria-hidden="true">
+                <use xlink:href="#minus"></use>
+            </svg>
+        </div>
+
+    </a>
+    <div
+        aria-live="polite"
+        class="accordion__content"
+        data-accordion-answer
+        id="answer-{{ accordion_id }}-{{ forloop.counter }}"
+        role="tabpanel"
+        aria-labelledby="question-{{ accordion_id }}-{{ forloop.counter }}"
+        aria-hidden="false">
+        <div class="accordion__content-container">
+            {% if accordion.introduction %}
+                <div class="accordion__introduction">
+                    {{ accordion.introduction }}
+                </div>
+            {% endif %}
+            {{ accordion.body|richtext|linebreaks }}
+            {% if accordion.link.url and accordion.link.title %}
+                {% include "patterns/atoms/link-primary/link-primary--link.html" with href=accordion.link.url text=accordion.link.title %}
+            {% endif %}
+            {# Accordion can also use a snippet which has different link fields #}
+            {% if accordion.link_url and accordion.link_title %}
+                {% include "patterns/atoms/link-primary/link-primary--link.html" with href=accordion.link_url text=accordion.link_title %}
+            {% endif %}
+            {% if scholarship %}
+                {# Scholarship fields #}
+                {% if accordion.eligible_programmes %}
+                    <p><strong>Eligible programmes: </strong>{{ accordion.eligible_programmes }}</p>
+                {% endif %}
+                {% if accordion.other_criteria %}
+                    <p><strong>Other criteria: </strong>{{ accordion.other_criteria }}</p>
+                {% endif %}
+                {% if accordion.fee_statuses %}
+                    <p><strong>Eligible fee status: </strong>{{ accordion.fee_statuses }}</p>
+                {% endif %}
+                {% if accordion.value %}
+                    <p><strong>Value: </strong>{{ accordion.value }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>

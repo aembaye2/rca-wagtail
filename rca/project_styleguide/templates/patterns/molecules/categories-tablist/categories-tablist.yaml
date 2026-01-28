@@ -1,0 +1,12 @@
+context:
+  reset:
+    text: 'Reset'
+    href: '#'
+  value:
+    title: Explore by
+    aria_label: Filter results
+    items:
+      - { title: School or Centre, href: '#' }
+      - { title: Research type, href: '#' }
+      - { title: Subject, href: '#' }
+      - { title: Theme, href: '#' }

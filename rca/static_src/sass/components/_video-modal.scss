@@ -1,0 +1,65 @@
+.video-modal {
+    @include z-index(modal);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: $color--black-80;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: visibility 0s, opacity $transition, transform $transition;
+
+    &.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        cursor: default;
+        visibility: visible;
+    }
+
+    &__container {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        margin: 0 auto;
+
+        .is-open & {
+            pointer-events: all;
+        }
+
+        @include media-query(large) {
+            width: 56%;
+            max-width: 1000px;
+        }
+    }
+
+    &__close {
+        @include z-index(modal-controls);
+        position: absolute;
+        display: inline-block;
+        top: 20px;
+        right: 20px;
+
+        &:focus {
+            outline: 2px solid $color--focus;
+        }
+
+        .is-open & {
+            pointer-events: all;
+        }
+    }
+
+    &__close-icon {
+        fill: $color--secondary;
+        transition: opacity $transition;
+
+        &:hover,
+        &:active,
+        &:focus {
+            opacity: 0.8;
+        }
+    }
+}

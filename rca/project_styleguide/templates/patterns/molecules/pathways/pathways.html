@@ -1,0 +1,15 @@
+<div class="pathways">
+    <h3 class="pathways__heading heading heading--five">Pathways</h3>
+    <p>{{ programme_page_global_fields.pathways_summary }}</p>
+    <div class="pathways__items">
+        {% for path in pathways %}
+            {% include "patterns/atoms/pathway-item/pathway-item.html" with path=path.value %}
+        {% endfor %}
+    </div>
+    {% if programme_page_global_fields.key_details_pathways_information_link_title %}
+    <a class="pathways__view-all link link--secondary link--link body body--two" href="?tab=yes#curriculum">
+        <span class="link__label">{{ programme_page_global_fields.key_details_pathways_information_link_title }}</span>
+        <svg class="link__icon" width="12" height="8"><use xlink:href="#arrow"></use></svg>
+    </a>
+    {% endif %}
+</div>

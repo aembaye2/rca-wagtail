@@ -1,0 +1,34 @@
+.image-info {
+    &__title {
+        font-weight: $weight--bold;
+    }
+
+    &__title,
+    &__creator {
+        padding-right: 4px;
+    }
+
+    .hero-action-pane & {
+        color: $color--black;
+    }
+
+    .title-area & {
+        transition: color $transition-cubic;
+
+        .bg--dark & {
+            color: $color--meta-darkbg;
+
+            &:hover {
+                color: $color--white;
+            }
+        }
+
+        .bg--light & {
+            color: $color--meta-lightbg;
+
+            &:hover {
+                color: $color--black;
+            }
+        }
+    }
+}

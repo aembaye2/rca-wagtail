@@ -1,0 +1,380 @@
+.carousel {
+    $root: &;
+    position: relative;
+    grid-column: 1 / span 2;
+    margin-bottom: ($gutter * 6);
+
+    @include media-query(large) {
+        grid-column: 2 / span 3;
+    }
+
+    &--square {
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+        }
+
+        #{$root}__slides {
+            position: relative;
+        }
+
+        #{$root}__controls {
+            padding-right: $gutter;
+            padding-left: $gutter;
+            margin-top: $gutter;
+
+            @include media-query(medium) {
+                padding-right: ($gutter * 3);
+                padding-left: ($gutter * 3);
+            }
+
+            @include media-query(large) {
+                display: none; // Reducing bottom space due to API module removal
+            }
+        }
+
+        #{$root}__controls-group {
+            display: none;
+
+            @include media-query(large) {
+                display: grid;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+            }
+
+            &--mobile {
+                display: block;
+                grid-column: 1 / -1;
+                margin: 0 auto;
+
+                @include media-query(large) {
+                    display: none;
+                }
+            }
+        }
+
+        #{$root}__button {
+            position: relative;
+
+            &--prev {
+                grid-column: 2 / span 1;
+                left: -77px;
+            }
+
+            &--next {
+                grid-column: 4 / span 1;
+                left: 30px;
+            }
+
+            &:disabled {
+                opacity: 0;
+            }
+        }
+    }
+
+    &--quotes {
+        #{$root}__item {
+            margin-right: ($gutter * 2);
+        }
+
+        #{$root}__button {
+            position: relative;
+
+            &--prev {
+                grid-column: 1 / span 1;
+                left: 50%;
+                margin-left: -23px; // half the width
+            }
+
+            &--next {
+                grid-column: 4 / span 1;
+                left: 50%;
+                margin-left: -23px; // half the width
+            }
+        }
+    }
+
+    &--logo {
+        grid-column: auto;
+        margin-bottom: 0;
+        padding: $gutter 0;
+
+        @include media-query(medium) {
+            padding: 0;
+        }
+
+        #{$root}__container {
+            @include media-query(large) {
+                padding-right: var(--outer-grid-width);
+            }
+        }
+
+        #{$root}__controls {
+            padding-right: $gutter;
+            padding-left: $gutter;
+            margin-top: ($gutter * 2);
+
+            @include media-query(medium) {
+                padding-right: ($gutter * 3);
+                padding-left: ($gutter * 3);
+            }
+
+            @include media-query(large) {
+                display: none;
+            }
+        }
+
+        #{$root}__controls-group {
+            display: none;
+            pointer-events: none;
+
+            @include media-query(large) {
+                display: grid;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translate3d(0, -50%, 0); // align in centre
+            }
+        }
+
+        #{$root}__button {
+            pointer-events: auto;
+            position: relative;
+
+            &--prev {
+                grid-column: 2 / span 1;
+                left: -77px;
+            }
+
+            &--next {
+                grid-column: 5 / span 1;
+                left: 30px;
+            }
+
+            &:disabled {
+                opacity: 0;
+            }
+        }
+    }
+
+    &--no-margin {
+        margin-bottom: $gutter;
+    }
+
+    &--people {
+        #{$root}__controls {
+            margin-right: $gutter;
+            margin-left: $gutter;
+
+            @include media-query(medium) {
+                margin-right: ($gutter * 3);
+                margin-left: ($gutter * 3);
+            }
+        }
+
+        #{$root}__controls-group {
+            display: none;
+
+            @include media-query(large) {
+                display: grid;
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                left: 0;
+                right: 0;
+                transform: translate3d(0, -50%, 0);
+            }
+        }
+
+        #{$root}__button {
+            position: relative;
+
+            &--prev {
+                grid-column: 2;
+                left: -($gutter * 2);
+                transform: translate3d(-100%, 0, 0);
+            }
+
+            &--next {
+                grid-column: 5;
+                left: ($gutter * 2);
+            }
+        }
+    }
+
+    &__item {
+        opacity: $transition-opacity;
+        transition: opacity $transition;
+
+        &.glide__slide--active {
+            opacity: 1;
+        }
+    }
+
+    &__logo-slide {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        @include media-query(large) {
+            max-width: calc(var(--grid-width) * 3);
+        }
+    }
+
+    &__liveregion {
+        @include hidden();
+    }
+
+    &__controls-group {
+        display: none;
+
+        @include media-query(large) {
+            @include z-index(modal-controls);
+
+            display: block;
+        }
+    }
+
+    &__mobile-controls-group {
+        display: flex;
+        justify-content: center;
+        gap: $gutter;
+        pointer-events: auto; // ensure prev/next buttons are clickable
+        margin-top: $gutter;
+
+        @include media-query(large) {
+            display: none;
+        }
+
+        &:first-child {
+            margin-right: $gutter;
+        }
+
+        #{$root}__button {
+            position: initial;
+
+            &.glide__arrow--disabled {
+                opacity: 0.3;
+                pointer-events: none;
+            }
+        }
+    }
+
+    &__bullet-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        width: 100%;
+        pointer-events: none;
+
+        @include media-query(large) {
+            display: none;
+        }
+    }
+
+    &__bullet {
+        flex: 1;
+        height: 2px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background-color: $color--scrollbar-lightbg-bg;
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:hover,
+        &:active,
+        &:focus {
+            outline: 0;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+
+        &.glide__bullet--active {
+            background-color: $color--black;
+        }
+    }
+
+    &__button {
+        position: absolute;
+        top: calc(50% - 23px);
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        margin: 0;
+        padding: 0;
+        transition: background-color $transition, opacity $transition-cubic;
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:hover,
+        &:active,
+        &:focus {
+            outline: none;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+
+        &--prev {
+            left: -80px;
+        }
+
+        &--next {
+            right: -80px;
+        }
+
+        &:disabled {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .partnerships & {
+        margin-bottom: 0; // Reducing bottom space due to API module removal
+    }
+
+    .bg--dark & {
+        #{$root}__button {
+            &:hover,
+            &:active,
+            &:focus {
+                stroke: $color--black;
+                background-color: $color--white;
+            }
+        }
+
+        #{$root}__button-icon {
+            stroke: $color--meta-darkbg;
+        }
+
+        #{$root}__bullet {
+            background-color: $color--scrollbar-darkbg-bg;
+
+            &.glide__bullet--active {
+                background-color: $color--white;
+            }
+        }
+    }
+
+    .bg--light & {
+        #{$root}__button {
+            &:hover,
+            &:active,
+            &:focus {
+                stroke: $color--white;
+                background-color: $color--black;
+            }
+        }
+
+        #{$root}__button-icon {
+            stroke: $color--meta-lightbg;
+        }
+
+        #{$root}__bullet {
+            background-color: $color--scrollbar-lightbg-bg;
+
+            &.glide__bullet--active {
+                background-color: $color--black;
+            }
+        }
+    }
+}

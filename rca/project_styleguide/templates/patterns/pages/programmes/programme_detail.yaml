@@ -1,0 +1,172 @@
+context:
+  page:
+    title: Architecture
+    degree_level: 'MA'
+    hero_image:
+      title: Synaputral Decadence is the flavour of the distant future
+      creator: Jianjin Lee Chen
+      photographer: Sekiro Yamananka
+    programme_description_title: 'We inspire design innovation'
+    programme_description_subtitle: 'Extend your knowledge, skills and creativity through research and experimentation.'
+    programme_image: true
+    programme_video: true
+    programme_video_caption: Watch inside our architecture studios
+    programme_description_copy: '<p>The programme conceives of architecture as a diverse and complex set of practices that move beyond traditional distinctions and limits in the field. The programme expands the possibilities of architecture and its agency in the world by encouraging an independent and critical ethos among its students.</p>'
+    get_ancestors:
+      - is_root: false
+        depth: 2
+        title: Degree Programmes
+      - is_root: false
+        depth: 3
+        title: School of Architecture
+    programme_gallery_title: 'Architecture gallery'
+    programme_gallery:
+      - slide:
+        value:
+          title: 'Albertopolissss 550-metre pedestrian tunnel'
+          author: 'Chris Lawton'
+          link: 'http://www.torchbox.com'
+          course: 'Architecture'
+      - slide:
+        value:
+          title: 'Albertopolis 550-metre pedestrian tunnel'
+          author: 'Nick Lee'
+          link: 'http://www.torchbox.com'
+          course: 'Design'
+      - slide:
+        value:
+          title: 'Albertopolis 550-metre pedestrian tunnel'
+          author: 'Chris Lawton'
+          link: 'http://www.torchbox.com'
+          course: 'Architecture'
+      - slide:
+        value:
+          title: 'Albertopolis 550-metre pedestrian tunnel'
+          author: 'Kevin Howbrook'
+          link: 'http://www.torchbox.com'
+          course: 'Design'
+    facilities_snippet:
+      introduction: The School of Architecture is located across both the RCA's historic Kensington site and London's newest cultural and research culture in White City.
+      link_url: '#'
+      link_title: See all college facilities
+      copy: The School of Architecture studios are the heart of day-to-day activity for the programmes and are purpose-designed for inspiration and interaction between students of different design disciplines. As well as an individual studio space, students have access to traditional 3D-making facilities, contemporary digital fabrication equipment and a suite of bookable project and making spaces.
+    facilities_gallery:
+      - slide:
+        value:
+          title: 'School of Architecture workshop rooms'
+      - slide:
+        value:
+          title: 'School of Architecture workshop rooms'
+      - slide:
+        value:
+          title: 'School of Architecture workshop rooms'
+    notable_alumni_text: 'Alumni from the RCA form an international network of creative individuals who have shaped and continue to shape the culture surrounding all of us.'
+    notable_alumni_links:
+      - link:
+        value:
+          name: 'James Dyson'
+          link: '#'
+      - link:
+        value:
+          name: 'Anton Furst'
+          link: '#'
+      - link:
+        value:
+          name: 'Golifer Langston Architects'
+          link: '#'
+    contact_model_text: 'If you want to register your interest about joining the RCA and recieve updates from the RCA and it’s community.'
+    contact_model_url: '#'
+    contact_model_link_text: 'Register your interest with us here'
+    contact_title: 'Contact us'
+    pathway_blocks:
+      - path:
+        value:
+          heading: 'Graphic Design'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+      - path:
+        value:
+          heading: 'Experimental Communication'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+      - path:
+        value:
+          heading: 'Illustration'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+    curriculum_video: 'https://www.youtube.com/watch?v=glIIF-kBXf0'
+    steps:
+      - step:
+        value:
+          heading: Make sure you have read the programme requirements
+          link:
+            url: '#'
+            title: See programme requirements
+      - step:
+        value:
+          heading: Check you have all the information we'll need you to supply
+          link:
+            url: '#'
+            title: See programme requirements
+      - step:
+        value:
+          heading: Start your application
+  related_programmes:
+    - item:
+      title: Related programmes
+      related_items:
+        - item:
+          title: Architecture
+          degree_level: MA
+          programme_description_subtitle: Architecture at the RCA sets out to inspire design innovation
+          img: http://placehold.it/300x270/fff/000
+        - item:
+          title: City design
+          degree_level: MA
+          programme_description_subtitle: Architecture at the RCA sets out to inspire design innovation
+          img: http://placehold.it/300x270/ff5d1c/fff
+        - item:
+          title: Environmental acrhitecture
+          degree_level: MA
+          programme_description_subtitle: Architecture at the RCA sets out to inspire design innovation
+          img: http://placehold.it/300x270
+  eventModule: false
+  news:
+    - item:
+      meta: 'Event'
+      title: 'Writing student wins £25,000 economics prize'
+      description: '6 — 12 August 2019'
+      link: '#'
+      image: true
+      person: false
+    - item:
+      meta: 'Event'
+      title: 'Redefining Boundaries: Architecture Work-in-progress 2019'
+      description: '23 November 2019'
+      link: '#'
+      image: false
+      person: false
+    - item:
+      meta: 'News'
+      title: 'Show 2018: School of Architecture: Making Space for the Future'
+      description: '23 November 2019'
+      link: '#'
+      image: true
+      person: false
+  programme_page_global_fields:
+    contact_text: Get in touch if you’d like to find out more or have any questions about working with the RCA.
+    contact_title: Contact Us
+    related_content_title: More opportunities to study at the RCA
+    pathways_summary: MA Animation comprises of three specialist pathways one of which students select as part of their application.
+    key_details_pathways_information_link_title: Find out more
+tags:
+  image:
+    page.contact_model_image fill-250x250:
+      raw: |
+        <img src="//placekitten.com/829/585">

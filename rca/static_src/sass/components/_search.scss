@@ -1,0 +1,118 @@
+.search {
+    $root: &;
+    position: relative;
+
+    @include media-query(medium) {
+        margin-right: ($gutter * 1.75);
+    }
+
+    &__label {
+        @include hidden();
+    }
+
+    &__input {
+        background: $color--primary;
+        color: $color--white;
+        border: 0;
+        appearance: none;
+        border-radius: 0;
+        width: 100%;
+        border-bottom: 1px inset $color--white;
+        padding: ($gutter * 0.5) ($gutter * 1.5) ($gutter * 0.5) ($gutter * 0.5);
+        transition: border-width $transition-cubic,
+            border-color $transition-cubic;
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:focus {
+            outline: 0;
+            border-bottom: 4px inset $color--tertiary;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+
+        &--with-left-icon {
+            padding-left: ($gutter * 1.5);
+        }
+    }
+
+    &__button {
+        $field-height: 46px;
+        height: $field-height;
+        position: absolute;
+        right: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: $color--white;
+        font-weight: $weight--bold;
+        cursor: pointer;
+
+        /* stylelint-disable a11y/no-outline-none */
+        &:focus {
+            outline: 0;
+        }
+        /* stylelint-enable a11y/no-outline-none */
+
+        @include media-query(medium) {
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+    }
+
+    &__icon {
+        fill: currentColor;
+        width: 12px;
+        height: 8px;
+    }
+
+    &__magnifying {
+        height: 46px;
+        position: absolute;
+        left: 0;
+        padding-top: 12px;
+
+        @include media-query(medium) {
+            padding-top: 10px;
+        }
+
+        svg {
+            fill: $color--white;
+            width: 16px;
+            height: 16px;
+
+            @include media-query(medium) {
+                width: 23px;
+                height: 23px;
+            }
+        }
+    }
+
+    &__count {
+        .bg--light & {
+            color: $color--meta-lightbg;
+        }
+
+        .bg--dark & {
+            color: $color--meta-darkbg;
+        }
+    }
+
+    // The inline search form has a slightly different layout, used on Programme finder and search listing templates
+    &--inline {
+        grid-column: 1 / span 2;
+        max-width: 460px;
+        padding-bottom: $gutter * 1.5;
+
+        @include media-query(medium) {
+            padding-bottom: $gutter * 4.5;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 2;
+        }
+
+        .app--search & {
+            @include media-query(medium) {
+                padding-bottom: $gutter;
+            }
+        }
+    }
+}

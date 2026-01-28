@@ -1,0 +1,97 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags static %}
+{% get_settings %}
+
+{% block tap_widget %}{{ tap_widget_code }}{% endblock %}
+
+{% block content %}
+
+    {% include "patterns/molecules/hero/hero.html" with hero_image=page.hero_image modifier="medium" %}
+
+    <div class="page page--overlap">
+
+        <div class="page__notch grid">
+            <div class="page__notch-block bg bg--dark"></div>
+        </div>
+
+        <header class="page__header bg bg--dark">
+            <div class="title-area title-area--breadcrumb grid">
+                <div class="title-area__content">
+                    <nav class="title-area__breadcrumb" aria-label="Breadcrumb">
+                        {% include "patterns/molecules/breadcrumb/breadcrumb.html" %}
+                    </nav>
+                    <h1 class="title-area__heading heading heading--display-two" id="main-content">{{ page.title }}</h1>
+                    {% if page.degree_level %}
+                        <p class="title-area__introduction introduction">{{ page.degree_level }}</p>
+                    {% endif %}
+                </div>
+                {% if page.hero_image_credit or page.hero_image %}
+                    <div class="title-area__credit layout__@large-start-five layout__@large-span-one">
+                        {% include 'patterns/atoms/image-info/image-info.html' with credit=page.hero_image_credit item=page.hero_image %}
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="page__content">
+
+            <div class="tabs js-tabs" data-tab-hash>
+
+                {% include "patterns/molecules/tab-nav/tab-nav.html" with modifier="bg bg--dark" sticky=True ask_question=True %}
+
+                <div class="tabs__panel js-tab-panel" id="overview" role="tabpanel" aria-labelledby="tab-overview">
+                    {% include "patterns/organisms/programme_tabs/programme_overview.html" %}
+                </div>
+                <div class="tabs__panel tabs__panel--hidden js-tab-panel" id="curriculum" role="tabpanel" aria-labelledby="tab-curriculum">
+                    {% include "patterns/organisms/programme_tabs/curriculum.html" with curriculum_image=page.curriculum_image subheading=page.curriculum_subtitle copy=page.curriculum_text caption=page.curriculum_video_caption video=page.curriculum_video %}
+                </div>
+
+                <div class="tabs__panel tabs__panel--hidden js-tab-panel" id="requirements" role="tabpanel" aria-labelledby="tab-requirements">
+                    {% include "patterns/organisms/programme_tabs/requirements.html" %}
+                </div>
+                <div class="tabs__panel tabs__panel--hidden js-tab-panel" id="fees-funding" role="tabpanel" aria-labelledby="tab-fees-funding">
+                    {% include "patterns/organisms/programme_tabs/fees-and-funding.html" %}
+                </div>
+                <div class="tabs__panel tabs__panel--hidden js-tab-panel" id="experience" role="tabpanel" aria-labelledby="tab-experience">
+                    {% include "patterns/organisms/programme_tabs/experience.html" %}
+                </div>
+                {% if not settings.utils.ProgrammeSettings.disable_apply_tab and not page.disable_apply_tab %}
+                <div class="tabs__panel tabs__panel--hidden js-tab-panel" id="apply" role="tabpanel" aria-labelledby="tab-apply">
+                    {% include "patterns/organisms/programme_tabs/apply.html" %}
+                </div>
+                {% endif %}
+
+                <section class="section bg bg--light">
+                    <div class="contact-anchor" id="contact"></div>
+                    <div class="section__row">
+                        {% include "patterns/organisms/contact/contact.html" with heading=programme_page_global_fields.contact_title text=programme_page_global_fields.contact_text image=page.contact_model_image %}
+                    </div>
+                </section>
+
+                <section class="section bg bg--dark">
+                    <div class="section__notch">
+                        <div class="section__notch-fill section__notch-fill--third-col"></div>
+                    </div>
+                    <div class="section__row">
+                        {% include "patterns/molecules/relatedcontent/relatedprogrammes.html" with title=programme_page_global_fields.related_content_title %}
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Course",
+          "name": "{{ page.title }}",
+          "description": "{{ page.introduction }}",
+          "provider": {
+            "@type": "Organization",
+            "name": "Royal College of Art",
+            "sameAs": "https://rca.ac.uk/"
+          }
+        }
+    </script>
+{% endblock %}

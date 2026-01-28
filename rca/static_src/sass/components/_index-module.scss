@@ -1,0 +1,53 @@
+.index-module {
+    $root: &;
+
+    &__header {
+        margin-right: $gutter;
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 2);
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+        }
+    }
+
+    &__heading {
+        &:first-child {
+            padding-top: 0; // ensure anchor-heading doesn't override
+        }
+    }
+
+    &__introduction {
+        margin-bottom: $gutter;
+
+        @include media-query(large) {
+            margin-bottom: ($gutter * 3);
+        }
+    }
+
+    &__content {
+        grid-column: 1 / span 2;
+
+        @include media-query(medium) {
+            grid-column: 2 / span 1;
+        }
+
+        @include media-query(large) {
+            grid-column: 3 / span 2;
+        }
+    }
+
+    .in-series & {
+        #{$root}__heading {
+            @include media-query(large) {
+                margin-right: (
+                    $gutter * 2
+                ); // Make "series" move onto the next line
+            }
+        }
+    }
+}

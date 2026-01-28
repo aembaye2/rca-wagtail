@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+<section class="section section--start bg bg--dark">
+    <div class="section__row programme-overview">
+        <header class="section__header grid">
+            <h2 class="section__heading section__heading--primary heading heading--two">
+                Requirements
+            </h2>
+        </header>
+        <div class="section__content grid">
+            <div class="programme-overview__body {% if page.requirements_video and page.requirements_video_preview_image %}programme-overview__body--video{% endif %}">
+                <p class="introduction">{{ programme_page_global_fields.requirements_introduction }}</p>
+                {{ page.requirements_text|richtext }}
+            </div>
+            {% if page.requirements_video and page.requirements_video_preview_image %}
+                <div class="programme-overview__video layout__start-one layout__span-two layout__@large-start-two layout__@large-span-three">
+                    {% include "patterns/organisms/image-video-block/image-video-block.html" with modal=page.requirements_video image=page.requirements_video_preview_image caption=page.requirements_video_caption video=page.requirements_video out_of_grid="true" heading=false has_meta=false subheading=false copy=false %}
+                </div>
+            {% endif %}
+        </div>
+        {% if page.requirements_blocks %}
+            <div class="programme-overview__pathways">
+                {% include "patterns/organisms/accordion-block/accordion-block.html" with accordions=page.requirements_blocks title='What\'s needed from you'%}
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section bg bg--light">
+    <div class="section__notch section__notch--top">
+        <div class="section__notch-fill section__notch-fill--third-col"></div>
+    </div>
+</section>

@@ -1,0 +1,9 @@
+.no-results {
+    &__heading {
+        margin-bottom: ($gutter * 0.5);
+    }
+
+    &__info {
+        margin-bottom: ($gutter * 2);
+    }
+}

@@ -1,0 +1,44 @@
+.image {
+    $root: &;
+    margin-bottom: $gutter;
+
+    @include media-query(medium) {
+        margin-bottom: ($gutter * 1.5);
+    }
+
+    &--right {
+        display: block;
+        grid-column: 1 / span 2;
+        margin-right: -$gutter;
+
+        @include media-query(medium) {
+            margin-right: $image-offset-right;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 4;
+        }
+
+        #{$root}__item {
+            height: 300px;
+            object-fit: cover;
+
+            @include media-query(medium) {
+                height: 500px;
+            }
+
+            @include media-query(large) {
+                height: 610px;
+            }
+        }
+    }
+
+    &__caption {
+        margin-bottom: ($gutter * 1.75);
+        grid-column: 1 / span 2;
+
+        @include media-query(large) {
+            grid-column: 2 / span 3;
+        }
+    }
+}

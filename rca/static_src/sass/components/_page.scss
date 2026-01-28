@@ -1,0 +1,146 @@
+.page {
+    $root: &;
+    $notch-medium-height: 75px;
+    $notch-large-height: 100px;
+
+    &--overlap {
+        @include media-query(medium) {
+            position: relative;
+            top: -$notch-medium-height;
+            margin-bottom: -$notch-medium-height;
+        }
+
+        @include media-query(large) {
+            top: -$notch-large-height;
+            margin-bottom: -$notch-large-height;
+        }
+    }
+
+    &--overlay {
+        @include z-index(gridlines);
+        position: relative;
+
+        .theme-dark & {
+            background-color: $color--black;
+        }
+
+        .theme-light & {
+            background-color: $color--white;
+        }
+    }
+
+    &__content {
+        @include media-query(large) {
+            // add black spacer in to prevent 'white bar' appearing above filters just before sticking
+            .app--staff-listing &,
+            .app--project-listing &,
+            .app--editorial-listing &,
+            .app--event-listing & {
+                position: relative;
+
+                &::before {
+                    content: '';
+                    width: 100%;
+                    background-color: $color--black;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 105px;
+                }
+            }
+        }
+    }
+
+    &__header {
+        // Adding space to allow for header overlaying content
+        #{$root}--no-hero & {
+            padding-top: ($gutter * 7);
+
+            @include media-query(medium) {
+                padding-top: ($gutter * 10);
+            }
+
+            @include media-query(large) {
+                padding-top: ($gutter * 12);
+            }
+        }
+
+        &--with-sticky-cta {
+            margin-top: -50px;
+
+            @include media-query(medium) {
+                margin-top: -91px;
+            }
+        }
+
+        &--with-sticky-cta-tall {
+            margin-top: -75px;
+
+            @include media-query(medium) {
+                margin-top: -117px;
+            }
+        }
+    }
+
+    &__notch-block {
+        @include media-query(medium) {
+            position: relative;
+            grid-column: 1 / span 2;
+            height: $notch-medium-height;
+        }
+
+        @include media-query(large) {
+            grid-column: 1 / span 4;
+            height: $notch-large-height;
+        }
+
+        &::before {
+            @include media-query(medium) {
+                position: absolute;
+                content: '';
+                display: block;
+                width: 100%;
+                left: 0;
+                transform: translate3d(
+                    -90%,
+                    0%,
+                    0
+                ); // if 100 someones shows a subpixel
+                height: $notch-medium-height;
+            }
+
+            @include media-query(large) {
+                height: $notch-large-height;
+            }
+        }
+
+        &.bg--dark {
+            &::before {
+                background-color: $color--black;
+            }
+        }
+
+        &.bg--light {
+            &::before {
+                background-color: $color--white;
+            }
+        }
+    }
+
+    .app--landing-page & {
+        #{$root}__notch-block {
+            @include media-query(large) {
+                grid-column: 1 / span 3;
+            }
+        }
+    }
+
+    .app--guide & {
+        #{$root}__header {
+            @include media-query(large) {
+                padding-top: ($gutter * 10);
+            }
+        }
+    }
+}

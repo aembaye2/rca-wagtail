@@ -1,0 +1,53 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="related-content related-content--large related-content--meta-new-line">
+    {% if title %}
+        <div class="section__row grid">
+            <h2 class="related-content__heading heading heading--two">{{ title }}</h2>
+        </div>
+    {% endif %}
+
+    {% for related_section in related_sections %}
+        <div class="related-content__group" data-group="{{ forloop.counter }}">
+            <div class="related-content__listing">
+                {% for related_item in related_section.related_items %}
+                    <div class="related-content__item grid" typeof="schema:Course">
+                        <meta property="schema:provider" content="Royal College of Art" />
+                        <div class="related-content__meta">
+                            <h3 class="related-content__title heading heading--five" property="schema:name">
+                                <a
+                                    href="{% pageurl related_item %}"
+                                    class="related-content__link"
+                                    data-related-title
+                                    data-target-image="{{ forloop.counter }}"
+                                    data-parent-group={{ forloop.parentloop.counter }}
+                                >
+                                    <span class="related-content__link-text">{{ related_item.title }}</span>
+                                    <svg width="12" height="8" class="related-content__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                                </a>
+                            </h3>
+                            {% with programme_types=related_item.programme_types.all %}
+                                {% if related_item.degree_levels %}
+                                    <p class="related-content__degree body body--one" property="schema:EducationalCredentialAwarded">{{ related_item.degree_level }}</p>
+                                {% else %}
+                                    <p class="related-content__degree body body--one" property="schema:EducationalCredentialAwarded">
+                                        {% for item in programme_types %}
+                                            {{ item.programme_type.display_name }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <p class="related-content__copy body body--one" property="schema:description">
+                            {% firstof related_item.programme_description_subtitle related_item.introduction related_item.listing_summary %}
+                        </p>
+                        {% image related_item.hero_image fill-500x500 as programme_image %}
+                        <div class="related-content__image-container">
+                            <img class="related-content__image {% if forloop.first %}is-visible{% endif %}" src="{{ programme_image.url }}" alt="{{ programme_image.alt }}" data-image="{{ forloop.counter }}" property="schema:image">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor  %}
+</div>

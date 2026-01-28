@@ -1,0 +1,95 @@
+.image-video-embed {
+    $root: &;
+    grid-column: 1 / span 2;
+    margin-bottom: ($gutter * 2);
+
+    @include media-query(medium) {
+        margin-bottom: ($gutter * 3);
+    }
+
+    @include media-query(large) {
+        grid-column: 2 / span 3;
+    }
+
+    &__link {
+        display: block;
+        position: relative;
+
+        &:active,
+        &:focus,
+        &:hover {
+            cursor: pointer;
+
+            #{$root}__caption {
+                color: $color--orange;
+            }
+
+            #{$root}__play-icon {
+                path:nth-child(2) {
+                    fill-opacity: 1;
+                }
+            }
+        }
+
+        // When it's used in a slideshow, inactive slides should not be clickable.
+        .glide__slide & {
+            pointer-events: none;
+        }
+
+        .glide__slide--active & {
+            pointer-events: all;
+        }
+    }
+
+    &__image-container {
+        position: relative;
+    }
+
+    &__image {
+        @include z-index(above-gridlines);
+        position: relative;
+
+        #{$root}__link & {
+            opacity: 0.8;
+
+            @include media-query(medium) {
+                opacity: 1;
+                transition: opacity $transition;
+
+                #{$root}:hover & {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+
+    &__play-icon {
+        @include z-index(above-gridlines);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        pointer-events: none;
+        height: 50px;
+        width: 50px;
+
+        path:nth-child(2) {
+            fill-opacity: 0;
+        }
+
+        @include media-query(medium) {
+            height: 80px;
+            width: 80px;
+        }
+    }
+
+    &__caption {
+        display: block;
+        margin-top: $gutter;
+        text-decoration: underline;
+
+        &--no-decoration {
+            text-decoration: none;
+        }
+    }
+}

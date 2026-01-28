@@ -1,0 +1,355 @@
+.header {
+    $root: &;
+    background-color: $color--black;
+    overflow: hidden; // Stop elements poking out during headroom transitions
+
+    &__container {
+        max-width: $site-width;
+        margin: 0 auto;
+        padding-top: ($gutter * 1.5);
+        padding-bottom: ($gutter);
+
+        @include media-query(medium) {
+            padding-bottom: ($gutter * 1.5);
+        }
+
+        @include media-query(large) {
+            padding-top: 33px;
+            padding-bottom: 33px;
+            max-height: $header-height-large; // stop the header increasing in height when audience links wrap
+        }
+    }
+
+    &__navigation-toggle {
+        display: flex;
+        align-items: center;
+
+        @include media-query(medium) {
+            align-items: flex-start;
+        }
+
+        .header__menus & {
+            @include z-index(nav);
+            position: relative;
+            padding-top: ($gutter * 2);
+
+            @include media-query(medium) {
+                padding-top: ($gutter * 1.5);
+            }
+
+            @include media-query(large) {
+                // Menu buttons aligned with global header icons
+                padding-top: 33px;
+            }
+        }
+
+        // When inside pinned nav
+        .headroom--pinned.headroom--not-top .header__menus & {
+            padding-top: 8px;
+        }
+
+        .headroom--pinned.headroom--not-top & {
+            align-items: center;
+        }
+    }
+
+    &__menu-toggle {
+        margin-left: auto;
+        color: $color--white;
+        cursor: pointer;
+        transition: opacity $transition;
+
+        .headroom--pinned.headroom--not-top & {
+            @include media-query(medium) {
+                margin-top: 0;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            opacity: 0.7;
+        }
+
+        @include media-query(medium) {
+            margin-right: 10%;
+            margin-left: 0;
+        }
+
+        &--small {
+            @include media-query(medium) {
+                display: none;
+            }
+        }
+
+        &--medium {
+            display: none;
+
+            @include media-query(medium) {
+                display: flex;
+            }
+        }
+
+        .app__navigation & {
+            margin-top: 39px;
+            opacity: 0.7;
+
+            @include media-query(medium) {
+                margin-top: 4px;
+            }
+        }
+
+        .headroom--pinned.headroom--not-top .app__navigation & {
+            margin-top: 18px;
+
+            @include media-query(medium) {
+                margin-top: 0;
+            }
+        }
+
+        .menu-active & {
+            opacity: 1;
+            cursor: initial;
+        }
+    }
+
+    &__search-toggle {
+        color: $color--white;
+        transition: opacity $transition;
+
+        &:hover,
+        &:focus,
+        &:active {
+            opacity: 0.7;
+        }
+
+        .app__navigation & {
+            opacity: 0.7;
+        }
+
+        .search-active & {
+            opacity: 1;
+            cursor: initial;
+        }
+    }
+
+    &__menu-close {
+        fill: $color--white;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+
+        @include media-query(large) {
+            bottom: -5px;
+        }
+    }
+
+    &__menus {
+        @include grid-layout();
+
+        &::before {
+            @include media-query(large) {
+                content: '';
+                background: $color--primary;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                display: block;
+                transform: translate3d(-90%, 0%, 0);
+            }
+        }
+    }
+
+    &__inner {
+        background: $color--primary;
+        padding-top: ($gutter * 1.5);
+
+        @include media-query(large) {
+            padding-top: 33px; // logo aligned with logo below
+            height: 100vh;
+        }
+
+        .headroom--pinned.headroom--not-top & {
+            padding-top: ($gutter);
+        }
+
+        &--container {
+            padding-top: 0;
+
+            @include media-query(medium) {
+                position: relative;
+            }
+        }
+
+        &--menu-container {
+            position: absolute;
+            left: $gutter;
+            width: calc(100% - (#{$gutter} * 2));
+            margin-top: ($gutter * 3.75);
+            height: 80%;
+
+            .search-active & {
+                margin-top: ($gutter * 5.25);
+            }
+
+            @include media-query(medium) {
+                left: unset;
+                width: 100%;
+                margin-top: ($gutter * 2.25);
+            }
+
+            @include media-query(large) {
+                position: static;
+                margin-top: 0;
+            }
+        }
+
+        &--drawer {
+            transition: transform $transition-cubic;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            display: none;
+            padding-top: 0;
+
+            @include media-query(medium) {
+                padding-top: ($gutter * 2);
+            }
+
+            @include media-query(large) {
+                padding-top: 0;
+                top: 58px;
+            }
+
+            .menu-active & {
+                display: block;
+            }
+        }
+
+        &--inline {
+            display: inline; // used to be spans, now divs
+        }
+
+        &--level-zero {
+            position: relative;
+
+            .search-active & {
+                position: static;
+
+                @include media-query(large) {
+                    position: relative;
+                }
+            }
+
+            @include media-query(medium) {
+                height: 100vh;
+            }
+        }
+
+        &--level-one {
+            @include z-index(nav);
+            position: relative;
+            padding-top: 0;
+            margin-top: -($gutter * 1.5);
+
+            @include media-query(medium) {
+                margin-top: 0;
+                padding-top: ($gutter * 2);
+            }
+
+            @include media-query(large) {
+                padding-top: ($gutter * 6.25);
+                height: 830px;
+
+                .headroom--pinned.headroom--not-top & {
+                    padding-top: ($gutter * 6.25);
+                }
+            }
+
+            // scroll first level on short screens
+            @media only screen and (min-width: 1023px) and (max-height: 780px) {
+                // gradient to indicate scrolling
+                &::after {
+                    content: '';
+                    display: block;
+                    pointer-events: none;
+                    position: sticky;
+                    bottom: 0;
+                    left: calc(16.74% + 85px);
+                    height: 100px;
+                    width: var(--grid-width);
+                    background: linear-gradient(
+                        358.73deg,
+                        rgba(0, 0, 0, 0.96) 3.08%,
+                        rgba(0, 0, 0, 0) 124.08%
+                    );
+                }
+
+                > nav {
+                    height: 500px;
+                    overflow: scroll;
+                    // hide scrollbars as per clients request
+                    scrollbar-width: none;
+
+                    .search-active & {
+                        height: 0; // don't show nav if search open
+                    }
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &--level-two {
+            @include z-index(nav);
+            transform: translate3d(100%, 0, 0);
+            opacity: 0;
+
+            &.is-visible {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+
+                // keep level three attached to level two
+                // to prevent overlapping
+                + #{$root}__inner--level-three {
+                    // level three open styles
+                    &.is-visible {
+                        @include z-index(nav);
+                        transform: translate3d(0, 0, 0);
+                    }
+                }
+            }
+
+            @include media-query(large) {
+                padding-top: $grid * 6.25;
+            }
+        }
+
+        // level three closed styles
+        &--level-three {
+            @include z-index(nav);
+            transform: translate3d(100%, 0, 0);
+            opacity: 0;
+
+            &.is-visible {
+                opacity: 1;
+            }
+
+            @include media-query(large) {
+                padding-top: $grid * 6.25;
+            }
+        }
+    }
+
+    // Show when scrolling back up
+    .headroom--pinned.headroom--not-top & {
+        #{$root}__container {
+            padding-top: ($gutter * 0.25);
+            padding-bottom: ($gutter * 0.25);
+        }
+    }
+}

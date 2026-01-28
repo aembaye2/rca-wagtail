@@ -1,0 +1,121 @@
+context:
+  page:
+    programme_image: true
+    programme_video: true
+    programme_video_caption: Watch inside our architecture studios
+    pathway_blocks:
+      - path:
+        value:
+          heading: 'Graphic Design'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+      - path:
+        value:
+          heading: 'Experimental Communication'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+      - path:
+        value:
+          heading: 'Illustration'
+          preview_text: 'Extending and disrupting the tools, intent and role of graphic design.'
+          link:
+            title: 'Find out more'
+            url: '#'
+    staff_link: true
+    staff_link_text: See all programme staff
+    facilities_snippet:
+      introduction: The School of Architecture is located across both the RCA's historic Kensington site and London's newest cultural and research culture in White City.
+      link_url: '#'
+      link_title: See all college facilities
+      copy: The School of Architecture studios are the heart of day-to-day activity for the programmes and are purpose-designed for inspiration and interaction between students of different design disciplines. As well as an individual studio space, students have access to traditional 3D-making facilities, contemporary digital fabrication equipment and a suite of bookable project and making spaces.
+  notable_alumni_links:
+    - link:
+      value:
+        name: 'James Dyson'
+        link: '#'
+    - link:
+      value:
+        name: 'Anton Furst'
+        link: '#'
+    - link:
+      value:
+        name: 'Golifer Langston Architects'
+        link: '#'
+  alumni_gallery: 'true'
+  programme_slideshow_modifier: slideshow--author-info
+  programme_page_global_fields:
+    pathways_summary: MA Animation comprises of three specialist pathways one of which students select as part of their application.
+    key_details_pathways_information_link_title: Find out more
+    alumni_summary_text: Alumni from the RCA form an international network of creative individuals who have shaped and continue to shape the culture surrounding all of us.
+  related_staff:
+    - {
+        name: 'Beth Hughes',
+        role: 'Head of Programmes',
+        description: 'Director of her own practice, Beth Hughes has worked on projects of all scales, public and private, around the world.',
+        link: '#',
+        link_text: 'Read more',
+      }
+    - {
+        name: 'Beth Hughes',
+        role: 'Head of Programmes',
+        description: 'Director of her own practice, Beth Hughes has worked on projects of all scales, public and private, around the world.',
+        link: '#',
+        link_text: 'Read more',
+      }
+  featured_work:
+    slides:
+      - slide:
+        value:
+          meta: 'Project'
+          title: 'Postproduction - The Future of Retail'
+          summary: 'Exploring the future of physical retail space in relation to British Land’s masterplan for Canada Water.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'Burberry'
+          summary: 'Promote a design-led disruptive research environment to develop new approaches to innovation in materials and applications.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'Designing the imposible for NASA'
+          summary: 'Creating world class experiences that started at the RCA'
+          link: '#'
+          person: false
+          image: True
+  programme_stories:
+    title: Programme stories section
+    slides:
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'RCA x CERN'
+          summary: 'Exploring how science, technology and design can propose solutions for international sustainability challenges.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Research'
+          title: 'Burberry'
+          summary: 'Promote a design-led disruptive research environment to develop new approaches to innovation in materials and applications.'
+          link: '#'
+          person: false
+          image: True
+      - slide:
+        value:
+          meta: 'Student project'
+          title: 'Designing the imposible for NASA'
+          summary: 'Creating world class experiences that started at the RCA'
+          link: '#'
+          person: false
+          image: True

@@ -1,0 +1,188 @@
+// --------------------------------- Colors -------------------------------------
+
+$color--black: #000;
+$color--white: #fff;
+$color--orange: #ff5d1c;
+$color--lighter-grey: #f2f2f2;
+$color--light-grey: #bbb;
+$color--dark-grey: #676767;
+$color--red: #f00;
+$color--red-light: #fb2424; // to pass contrast on dark grey bg
+$color--blue: #009bde;
+
+$color--white-12: rgba($color--white, 0.12);
+$color--white-24: rgba($color--white, 0.24);
+$color--white-65: rgba($color--white, 0.65);
+$color--white-80: rgba($color--white, 0.8);
+$color--black-12: rgba($color--black, 0.12);
+$color--black-24: rgba($color--black, 0.24);
+$color--black-65: rgba($color--black, 0.65);
+$color--black-80: rgba($color--black, 0.8);
+
+$color--form-input-darkbg: #191919;
+$color--form-input-focus-darkbg: #0d0d0d;
+
+$color--form-input-lightbg: #e5e5e5;
+$color--form-input-focus-lightbg: #f2f2f2;
+
+$color--primary: $color--black;
+$color--secondary: $color--white;
+$color--tertiary: $color--orange;
+
+$color--scrollbar-darkbg-bg: $color--white-24;
+$color--scrollbar-lightbg-bg: $color--black-24;
+
+$color--grid-line-light: $color--white-12;
+$color--grid-line-dark: $color--black-12;
+
+$color--meta-darkbg: $color--light-grey;
+$color--meta-lightbg: $color--dark-grey;
+
+$color--focus: $color--blue;
+
+// --------------------------------- Font faces -------------------------------------
+
+/* source-sans-3-latin-400-normal */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-display: block;
+    font-weight: 400;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-400-normal.woff2)
+        format('woff2');
+}
+
+/* source-sans-3-latin-500-normal */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-display: block;
+    font-weight: 500;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-500-normal.woff2)
+        format('woff2');
+}
+
+/* source-sans-3-latin-400-italic */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: italic;
+    font-display: block;
+    font-weight: 400;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-400-italic.woff2)
+        format('woff2');
+}
+
+/* source-sans-3-latin-500-italic */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: italic;
+    font-display: block;
+    font-weight: 500;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-500-italic.woff2)
+        format('woff2');
+}
+
+// --------------------------------- Fonts --------------------------------------
+
+$font--primary: 'Source Sans 3', sans-serif;
+
+// Font weights
+$weight--bold: 500;
+$weight--normal: 400;
+
+// Line heights
+$line-height-large: 122%;
+$line-height-tight: 17px;
+$base-line-height: 20px;
+
+// Font sizes
+$base-font-size: 18px;
+
+$large-font-sizes: (
+    xxxxl: 90px,
+    xxxl: 76px,
+    xxl: 64px,
+    xl: 46px,
+    l: 32px,
+    m: 30px,
+    s: 24px,
+    xs: 18px,
+);
+
+$medium-font-sizes: (
+    xxxxl: 78px,
+    xxxl: 68px,
+    xxl: 52px,
+    xl: 38px,
+    l: 28px,
+    m: 26px,
+    s: 20px,
+    xs: 18px,
+);
+
+$small-font-sizes: (
+    xxxxl: 44px,
+    xxxl: 38px,
+    xxl: 32px,
+    xl: 28px,
+    l: 24px,
+    m: 22px,
+    s: 18px,
+    xs: 18px,
+);
+
+// --------------------------------- Breakpoints --------------------------------------
+$breakpoints: ('medium' '(min-width: 599px)', 'large' '(min-width: 1023px)');
+
+// --------------------------------- Z-indices --------------------------------------
+
+$z-index: (
+    under: -10,
+    base: 10,
+    overlap: 20,
+    free30: 30,
+    header-logo: 40,
+    sticky-nav-bar: 43,
+    under-gridlines: 45,
+    gridlines: 50,
+    above-gridlines: 60,
+    sticky-nav-bar-header: 66,
+    header: 70,
+    footer: 71,
+    nav-overlay: 75,
+    nav: 80,
+    header-gridlines: 90,
+    above-header-gridlines: 100,
+    modal: 110,
+    modal-controls: 120,
+    above-shorthand-embed: 210,
+);
+
+// --------------------------------- Grid Dimensions --------------------------------------
+
+$grid: 20px;
+$gutter: $grid;
+
+// Wrappers
+$site-width: 1440px;
+
+// Offsets
+$image-offset-right: -($gutter * 3);
+
+// Magic number
+// Header when headroom is active
+$mini-header-height: 80px;
+$header-height-small: 98px;
+$header-height-large: 90px;
+
+// --------------------------------- Transitions --------------------------------------
+
+$transition: 250ms ease-out;
+$transition-opacity: 0.36;
+$transition-cubic: 250ms cubic-bezier(0.24, 0.26, 0.2, 1);
+
+// --------------------------------- Custom properties --------------------------------------
+
+:root {
+    --grid-width: 0; // populated with carousel js
+}

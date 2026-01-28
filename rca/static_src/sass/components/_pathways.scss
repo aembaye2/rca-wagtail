@@ -1,0 +1,11 @@
+.pathways {
+    padding-bottom: ($gutter * 3);
+
+    &__heading {
+        margin-bottom: $gutter;
+    }
+
+    &__items {
+        padding-top: ($gutter * 0.5);
+    }
+}

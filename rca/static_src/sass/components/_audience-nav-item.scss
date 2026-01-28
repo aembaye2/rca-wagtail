@@ -1,0 +1,99 @@
+.audience-nav-item {
+    $root: &;
+    transition: opacity $transition;
+
+    &__link {
+        @include underline-hover();
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        color: $color--white;
+    }
+
+    &__label {
+        margin-right: 5px;
+    }
+
+    &__icon {
+        transform: rotate(-45deg) translate(0, 0);
+        fill: currentColor;
+    }
+
+    &__description {
+        @include font-size(xs);
+        flex-basis: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        color: $color--meta-lightbg;
+        margin-top: 4px;
+    }
+
+    &--desc {
+        #{$root}__label {
+            @include font-size(xs); // match header
+        }
+    }
+
+    .hero-action-pane & {
+        #{$root}__link {
+            color: $color--black;
+        }
+    }
+
+    .header & {
+        display: none;
+
+        @include media-query(large) {
+            display: flex;
+            align-items: center;
+        }
+
+        #{$root}__label {
+            @include font-size(xs);
+        }
+    }
+
+    .app--homepage .header & {
+        @include media-query(large) {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .app--homepage.headroom--not-top .header &,
+    .app--homepage.show-nav .header & {
+        @include media-query(large) {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .footer & {
+        margin-bottom: $gutter;
+
+        @include media-query(large) {
+            margin-bottom: 0;
+        }
+
+        #{$root}__link {
+            color: $color--white;
+        }
+
+        #{$root}__icon {
+            fill: $color--white;
+            display: none;
+
+            @include media-query(large) {
+                display: block;
+            }
+        }
+
+        #{$root}__label {
+            @include font-size(xs);
+        }
+    }
+
+    .headroom--pinned.headroom--not-top .header & {
+        align-items: center;
+    }
+}

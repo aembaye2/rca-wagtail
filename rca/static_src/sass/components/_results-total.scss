@@ -1,0 +1,21 @@
+.results-total {
+    $root: &;
+    position: relative;
+
+    &__anchor {
+        position: absolute;
+        top: -20px;
+    }
+
+    .bg--dark & {
+        #{$root}__number {
+            color: $color--meta-darkbg;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__number {
+            color: $color--meta-lightbg;
+        }
+    }
+}

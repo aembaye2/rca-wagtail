@@ -1,0 +1,30 @@
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+
+<div class="search-result">
+{% if pick.external_link_url %}
+    <a class="search-result__link grid" href="{{ pick.external_link_url }}">
+{% else %}
+    <a class="search-result__link grid" href="{% pageurl result %}">
+{% endif %}
+        <div class="search-result__header layout__@large-start-two layout__@large-span-one">
+            <h3 class="search-result__heading heading heading--five">{% firstof pick.external_link_text result.listing_title result.title %}</h3>
+            {% if search_pick %}<div class="search-result__editor-pick body body--support">Recommended result</div>{% endif %}
+        </div>
+        {% with meta=result.specific.listing_meta %}
+            {% if meta %}
+                <p class="search-result__meta layout__@large-start-three layout__@large-span-one body body--two">{{ meta }}</p>
+            {% endif %}
+        {% endwith %}
+        {% if pick.description or result.listing_summary or result.search_description or result.introduction %}
+        {# Firstof autoescapes variable values so we need to disable it to render special characters "'" properly. #}
+        {% autoescape off %}
+        <div class="search-result__summary layout__@large-start-four layout__span-two body body--one">{% firstof result.search_listing_summary pick.description result.listing_summary result.search_description result.introduction|richtext %}</div>
+        {% endautoescape %}
+        {% endif %}
+        <svg class="search-result__icon" aria-hidden="true">
+            <use xlink:href="#arrow-right-filled"></use>
+        </svg>
+    </a>
+</div>
+
+

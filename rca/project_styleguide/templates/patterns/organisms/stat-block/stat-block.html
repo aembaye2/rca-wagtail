@@ -1,0 +1,61 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+{% image stats_block.background_image max-1000x500 as bg_image %}
+<section class="section section--stat-block {% if modifier %}section--{{ modifier }}{% endif %} {% if stats_block_default_notch_override %}section--stat-block-notch-override{% endif %} bg bg--stat-block bg--dark" data-stat-block style="--stat-block-bg-image: url('{{ bg_image.url }}')">
+
+    <div class="section__notch {% if not stats_block_default_notch_override %}section__notch--transparent section__notch--opposite{% endif %}">
+        <div class="section__notch-fill section__notch-fill--second-col{% if top_notch_bg %} section__notch-fill--{{ top_notch_bg }}{% endif %}"></div>
+    </div>
+
+    <div class="section__row stat-block {% if stats_block.statistics|length > 3 %}stat-block--large{% endif %}">
+
+        {% if stats_block.title %}
+            <div class="stat-block__header grid">
+                <h2 class="stat-block__heading heading heading--three">{{ stats_block.title }}</h2>
+            </div>
+        {% endif %}
+
+        {% for stat in stats_block.statistics %}
+            {% with stat=stat.value %}
+                <div class="stat-block__item-container grid">
+                    <div class="stat-block__item">
+
+                        <div class="stat-block__number-container">
+                            {% if stat.before %}
+                                <span class="stat-block__before">{{ stat.before }}</span>
+                            {% endif %}
+                            <p class="stat-block__number">
+                                {{ stat.number }}
+                            </p>
+                            {% if stat.after %}
+                                <span class="stat-block__after">{{ stat.after }}</span>
+                            {% endif %}
+                        </div>
+
+                        {% if stat.meta %}
+                            <p class="stat-block__meta heading heading--five">{{ stat.meta }}</p>
+                        {% endif %}
+
+                        {% if stat.summary %}
+                            <p class="stat-block__body body body--one">{{ stat.summary }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+
+    {% if stats_block.page_link %}
+        <div class="stat-block__footer grid">
+            <div class="stat-block__footer-action">
+                <a href="{% pageurl stats_block.page_link %}" class="stat-block__footer-link link link--tertiary link--link">
+                    <span class="link__label">{{ stats_block.page_link.title }}</span>
+                    <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="section__notch {% if stats_block_default_notch_override %}section__notch--opposite{% endif %}">
+        <div class="section__notch-fill section__notch-fill--second-col{% if bottom_notch_bg %} section__notch-fill--{{ bottom_notch_bg }}{% endif %}"></div>
+    </div>
+</section>

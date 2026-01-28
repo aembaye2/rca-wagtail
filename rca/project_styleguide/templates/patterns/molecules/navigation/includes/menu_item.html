@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}{% pageurl page as item_url %}
+<a
+    role="menuitem"
+    class="nav__link"
+    href="{{ item_url }}"
+    {% if has_children %} data-open-subnav{% endif %}
+>
+    {{ title|default:page.title }}
+</a>

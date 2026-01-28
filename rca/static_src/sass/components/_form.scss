@@ -1,0 +1,31 @@
+.form {
+    $root: &;
+
+    &__container {
+        margin-bottom: 20px;
+    }
+
+    &__errors {
+        @include font-size(s);
+        margin-bottom: 15px;
+        color: $color--red;
+
+        @include media-query(large) {
+            width: 66%;
+        }
+    }
+
+    &__heading {
+        margin-bottom: $gutter;
+
+        @include media-query(large) {
+            margin-bottom: ($gutter * 1.5);
+        }
+    }
+
+    &__action {
+        @include media-query(large) {
+            width: 66.66%;
+        }
+    }
+}

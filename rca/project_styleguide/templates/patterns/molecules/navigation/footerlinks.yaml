@@ -1,0 +1,16 @@
+context:
+  footerlinks:
+    - link:
+      text: 'Privacy & Cookies'
+      url: '#'
+    - link:
+      text: 'Terms & Conditions'
+      url: '#'
+    - link:
+      text: 'Accessibility'
+      url: '#'
+
+tags:
+  include_block:
+    'link with class="footer"':
+      template_name: 'patterns/molecules/navigation/blocks/menu_item.html'

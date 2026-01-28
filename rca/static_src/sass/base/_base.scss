@@ -1,0 +1,150 @@
+/*------------------------------------*\
+$BASE DEFAULTS
+\*------------------------------------*/
+
+// Box Sizing
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Prevent text size change on orientation change.
+html {
+    font-family: $font--primary;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto;
+    }
+
+    &.sticky-compensator {
+        // height of header to ensure validation messages aren't hidden behind sticky header
+        scroll-padding-top: 120px;
+
+        @include media-query(large) {
+            scroll-padding-top: 130px;
+        }
+    }
+
+    // Fix for Chrome - doesn't show form validate messages when this is set to smooth
+    &.no-scroll-behavoir {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    background-color: $color--secondary;
+
+    @include media-query(large) {
+        overflow-x: hidden; // so we don't get horizontal scrollbars
+    }
+
+    &.no-scroll {
+        overflow-y: hidden;
+    }
+
+    &::after {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $transition;
+    }
+
+    &.nav-open {
+        // mobile nav overlay - has to be attached to the body
+        &::before {
+            @include z-index(header-gridlines);
+            content: '';
+            display: block;
+            pointer-events: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(
+                358.73deg,
+                rgba(0, 0, 0, 0.96) 3.08%,
+                rgba(0, 0, 0, 0) 124.08%
+            );
+
+            @include media-query(medium) {
+                display: none;
+            }
+        }
+
+        &::after {
+            @include z-index(nav-overlay);
+            content: '';
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $color--black-80;
+            opacity: 1;
+        }
+
+        &.search-active {
+            // hide the overlay when the search is open
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+// Prevent empty space below images appearing
+img,
+svg {
+    vertical-align: top;
+}
+
+// Responsive images
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+a {
+    font-weight: $weight--bold;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+    }
+
+    // Set focus for Safari - doesn't support focus-visible:nth-last-of-type() https://caniuse.com/?search=focus-visible
+    &:focus {
+        outline: 2px solid $color--focus;
+    }
+
+    // Undo normal focus for browsers that do support focus-visible
+    &:focus:not(:focus-visible) {
+        outline: initial;
+    }
+
+    // Focus-visible only shows focus state when keyboard is used
+    &:focus-visible {
+        outline: 2px solid $color--focus;
+    }
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}

@@ -1,0 +1,103 @@
+{% load cache static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+<!doctype html>
+<html lang="en-GB" class="{% block html_class %}{% endblock %}">
+    <head>
+        {# TODO fallbacks if page is not defined e.g. for 404 page #}
+        <meta charset="utf-8" />
+        <title>{% block titletag %}{% block title %}{{ meta_title }}{% endblock %} | {{ request.site.site_name }}{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}{{ meta_description }}{% endblock %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        {% if not request.is_preview %}
+            <link rel="canonical" href="{% block canonical_url %}{% get_canonical_url %}{% endblock %}">
+        {% endif %}
+        {% if request.in_preview_panel %}
+            <base target="_blank">
+        {% endif %}
+        {% if SEO_NOINDEX %}
+            <meta name="robots" content="noindex" />
+        {% endif %}
+
+        {% block extra_css %}{% endblock %}
+
+        {% if GOOGLE_TAG_MANAGER_ID %}
+            {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Heroku settings #}
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_ID|escapejs }}');</script>
+        {% endif %}
+
+        {# favicons #}
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static "images/apple-touch-icon.png" %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "images/favicon-32x32.png" %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static "images/favicon-16x16.png" %}">
+        <link rel="manifest" href="{% static "images/site.webmanifest" %}">
+        <link rel="mask-icon" href="{% static "images/safari-pinned-tab.svg" %}" color="#000000">
+        <link rel="shortcut icon" href="{% static "images/favicon.ico" %}">
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="msapplication-config" content="{% static "images/browserconfig.xml" %}">
+        <meta name="theme-color" content="#000000">
+        {% block meta_tags %}{% endblock %}
+
+    </head>
+
+    <body class="app {% block body_class %}app--{{ page.get_verbose_name|slugify }}{% endblock %} {% block header_class %}{% endblock %}" prefix="schema: https://schema.org/">
+
+        {% if GOOGLE_TAG_MANAGER_ID %}
+            {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Django settings #}
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID|urlencode }}"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        {% endif %}
+        
+        {% block body_top %}{% endblock %}
+
+        {% include "patterns/atoms/skip-link/skip-link.html" %}
+
+        {% if settings.utils.SitewideAlertSetting.show_alert %}
+            {% include "patterns/molecules/sitewide-alert/sitewide-alert.html" %}
+        {% endif %}
+
+        {% include "patterns/molecules/outdated-banner/outdated-banner.html" %}
+        {% include "patterns/atoms/sprites/sprites.html" %}
+
+        {% wagtailuserbar %}
+        <header class="app__header" data-header>
+            {% include "patterns/atoms/grid-lines/grid-lines.html" %}
+            {% block header %}{% endblock %}
+        </header>
+
+        <nav class="app__navigation" data-nav-container>
+            {% include "patterns/atoms/grid-lines/grid-lines.html" %}
+            <div class="header__menus">
+                {% cache 3600 "primarynav" settings.navigation.NavigationSettings.last_updated_at %}
+                    {% primarynav %}
+                {% endcache %}
+            </div>
+        </nav>
+
+        <main class="app__content">
+
+            {% include "patterns/atoms/grid-lines/grid-lines.html" with data_tag_left="data-left-edge" data_tag_center="data-grid-center" %}
+
+            {% block content %}
+                {% if pattern_library_rendered_pattern %}
+                    <div class="pattern-library bg bg--light">
+                        {{ pattern_library_rendered_pattern }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </main>
+
+        <footer class="app__footer">
+            {% include "patterns/atoms/grid-lines/grid-lines.html" %}
+            {% block footer %}{% endblock %}
+        </footer>
+
+        <script src="{% static 'js/main.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+        {% block tap_widget %}
+        {% endblock %}
+    </body>
+</html>

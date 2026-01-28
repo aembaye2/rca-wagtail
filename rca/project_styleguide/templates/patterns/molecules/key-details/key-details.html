@@ -1,0 +1,177 @@
+{% load wagtailcore_tags %}
+<div class="key-details {% if course_type == 'short' %}key-details--short{% endif %}">
+    <div class="key-details__header">
+        <h4 class="heading heading--five key-details__heading">Key details</h4>
+    </div>
+    {% if course_type == 'short' %}
+        {% if shortcourse_details_fees %}
+            <div class="key-details__section key-details__section--fees">
+                <h5 class="body body--two key-details__sub-heading">Fees</h5>
+                <ul class="key-details__list">
+                    {% for item in shortcourse_details_fees %}
+                    <li class="key-details__list-item">
+                        {{ item }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.dates %}
+        <div class="key-details__section key-details__section--dates">
+            <h5 class="body body--two key-details__sub-heading">Dates</h5>
+            <ul class="key-details__list">
+                <li class="key-details__list-item">
+                    {{ page.dates|richtext }}
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+        {% if page.location %}
+            <div class="key-details__section key-details__section--location">
+                <h5 class="body body--two key-details__sub-heading">Location</h5>
+                <ul class="key-details__list">
+                    <li class="key-details__list-item">
+                        {{ page.location|richtext }}
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.show_register_link and register_interest_link or page.manual_registration_url and page.show_register_interest_link %}
+            <div class="key-details__section key-details__section--action">
+                <a class="key-details__link link link--primary link--download" href="{% firstof page.manual_registration_url register_interest_link %}">
+                    <span class="link__label">Register your interest</span>
+                    <svg width="8" height="12" class="link__icon" aria-hidden="true"><use xlink:href="#download"></use></svg>
+                </a>
+            </div>
+        {% endif %}
+    {% else %}
+        {% if page.programme_details_credits or page.programme_details_time or page.study_mode %}
+            <div class="key-details__section key-details__section--details">
+                {% if programme_page_global_fields.key_details_programme_details_title %}
+                    <h5 class="body body--two key-details__sub-heading">{{ programme_page_global_fields.key_details_programme_details_title }}</h5>
+                {% endif %}
+                <ul class="key-details__list">
+                    {% if page.programme_details_credits and page.programme_details_credits_suffix %}
+                    <li class="key-details__list-item">
+                        {{ page.programme_details_credits }} {{ page.get_programme_details_credits_suffix_display }}
+                    </li>
+                    {% endif %}
+                    {% if page.programme_details_time and  page.programme_details_time_suffix %}
+                    <li class="key-details__list-item">
+                        {{ page.programme_details_time }} {{ page.get_programme_details_time_suffix_display }}
+                    </li>
+                    {% endif %}
+                    {% if page.study_mode %}
+                    <li class="key-details__list-item">
+                        {{ page.study_mode }}
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if programme_schools %}
+            <div class="key-details__section key-details__section--school">
+                <h5 class="body body--two key-details__sub-heading">School or Centre</h5>
+                <ul class="key-details__list">
+                    {% for school in programme_schools %}
+                    <li class="key-details__list-item">
+                         <a href="{% pageurl school.page %}" class="link link--tertiary">{{ school.page.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.campus_locations %}
+            <div class="key-details__section key-details__section--school">
+                <h5 class="body body--two key-details__sub-heading">Current location</h5>
+                <ul class="key-details__list">
+                    {% for location in page.campus_locations %}
+                    <li class="key-details__list-item">
+                        {% if location.programme_location_url %}
+                            <a href="{{ location.programme_location_url }}" class="link link--tertiary">{{ location.programme_location__title }}</a>
+                        {% else %}
+                            {{ location.programme_location__title }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.next_open_day_date or page.link_to_open_days %}
+            <div class="key-details__section key-details__section--open-days">
+                {% if programme_page_global_fields.key_details_next_open_day_title %}
+                    <h5 class="body body--two key-details__sub-heading">{{ programme_page_global_fields.key_details_next_open_day_title }}</h5>
+                {% endif %}
+                <ul class="key-details__list">
+                    {% if page.next_open_day_date %}
+                        <li class="key-details__list-item">{{ page.next_open_day_date }}</li>
+                    {% endif %}
+                    {% if page.link_to_open_days %}
+                        <li class="key-details__list-item">
+                            <a class="key-details__link link link--secondary link--link" href="{{ page.link_to_open_days }}">
+                                <span class="link__label">{{ page.book_or_view_all_open_days_link_title }}</span>
+                                <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.application_deadline or page.application_deadline_options %}
+            <div class="key-details__section key-details__section--deadline">
+                {% if programme_page_global_fields.key_details_application_deadline_title %}
+                    <h5 class="body body--two key-details__sub-heading">{{ programme_page_global_fields.key_details_application_deadline_title }}</h5>
+                {% endif %}
+                <ul class="key-details__list">
+                    {% if page.application_deadline_options == '1' or page.application_deadline_options == '3' %}
+                        <li class="key-details__list-item">{{ page.get_application_deadline_options_display }}</li>
+                    {% else %}
+                        {% if page.application_deadline %}
+                        <li class="key-details__list-item">{{ page.application_deadline }}</li>
+                        {% endif %}
+                        {% if page.application_deadline_options %}
+                        <li class="key-details__list-item">{{ page.get_application_deadline_options_display }}</li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.career_opportunities.all %}
+            <div class="key-details__section key-details__section--career">
+                {% if programme_page_global_fields.key_details_career_opportunities_title %}
+                    <h5 class="body body--two key-details__sub-heading">{{ programme_page_global_fields.key_details_career_opportunities_title }}</h5>
+                {% endif %}
+                <ul class="key-details__list">
+                {% for detail in page.career_opportunities.all %}
+                    <li class="key-details__list-item">{{ detail.text }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if page.programme_specification.url %}
+            <div class="key-details__section key-details__section--action">
+                {% with file=page.programme_specification %}
+                <a class="key-details__link link link--secondary link--download" href="{{ file.url }}">
+                    <span class="link__label">Download {{ file.title }} ({{ file.file_extension|upper }} {{ file.get_file_size|filesizeformat }})</span>
+                    <svg width="8" height="12" class="link__icon" aria-hidden="true"><use xlink:href="#download"></use></svg>
+                </a>
+                {% endwith %}
+            </div>
+        {% endif %}
+        {% if social_media_links %}
+            <div class="key-details__section key-details__section--social">
+                <h5 class="body body--two key-details__sub-heading">{% firstof page.social_media_links_title "Follow this programme" %}</h5>
+                <ul class="key-details__list">
+                    {% for item in social_media_links %}
+                        <li class="key-details__list-item">
+                            <a class="key-details__link link link--social link--link" href="{{ item.link_url }}">
+                                <span class="link__label">{{ item.link_text }}</span>
+                                <svg width="12" height="8" class="link__icon" aria-hidden="true"><use xlink:href="#arrow"></use></svg>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

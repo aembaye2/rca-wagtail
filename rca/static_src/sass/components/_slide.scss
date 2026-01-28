@@ -1,0 +1,194 @@
+.slide {
+    $root: &;
+
+    // When used as a block, when scrolling through the slideshow
+    // it  must be on top of whatever's on the sidebar. Since we have an
+    // opacity effect, we need to set the background color to show that it's on
+    // top.
+    .slideshow--block & {
+        .bg--dark & {
+            background-color: $color--black;
+        }
+
+        .bg--light & {
+            background-color: $color--white;
+        }
+    }
+
+    &__overlay {
+        opacity: $transition-opacity;
+        transition: opacity $transition;
+
+        .glide__slide--active & {
+            opacity: 1;
+        }
+    }
+
+    &--author {
+        #{$root}__meta {
+            @include media-query(medium) {
+                display: flex;
+                min-height: 70px;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+        margin-bottom: ($gutter);
+        transition: opacity $transition-cubic;
+    }
+
+    &__meta {
+        position: relative;
+        opacity: 0;
+        transition: opacity $transition;
+
+        @include media-query(medium) {
+            @include z-index(base);
+        }
+
+        @include media-query(large) {
+            display: flex;
+            min-height: 70px; // ensure controls don't butt up against the image
+        }
+    }
+
+    &__heading {
+        @include font-size(xs);
+        margin-bottom: ($gutter * 1.5);
+
+        @include media-query(medium) {
+            flex-basis: 50%;
+            max-width: 50%;
+            min-width: 50%;
+        }
+
+        @include media-query(large) {
+            flex-basis: 66.666%;
+            max-width: 66.666%;
+            min-width: 66.666%;
+            margin-bottom: 0;
+        }
+    }
+
+    &__author-info {
+        @include media-query(medium) {
+            flex-basis: 50%;
+            max-width: 50%;
+            min-width: 50%;
+            text-align: right;
+        }
+
+        @include media-query(large) {
+            flex-basis: 33.333%;
+            max-width: 33.333%;
+            min-width: 33.333%;
+            text-align: left;
+        }
+    }
+
+    &__author {
+        @include font-size(xs);
+        display: inline;
+        font-weight: $weight--normal;
+        margin-bottom: 0;
+    }
+
+    &__author-course {
+        @include font-size(xs);
+        margin-top: ($gutter * 0.25);
+    }
+
+    &__link {
+        @include underline-hover();
+    }
+
+    &__type {
+        @include font-size(xs);
+        position: absolute;
+        top: -20px;
+        right: 0;
+        height: 64px;
+        transform: translate3d(0, -100%, 0); // sit above the parent area
+    }
+
+    &__action {
+        @include underline-hover-target();
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: $gutter ($gutter * 1.5);
+        font-weight: $weight--bold;
+        color: $color--black;
+        background-color: $color--white;
+        background-size: 0;
+        background-image: none;
+        text-transform: uppercase;
+        line-height: 1.2;
+        border: 0;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &--embed {
+            text-transform: none;
+        }
+    }
+
+    &__type-icon {
+        fill: $color--dark-grey;
+        margin-right: 10px;
+
+        &::after {
+            content: '';
+            display: block;
+            height: 24px;
+            width: 24px;
+            border-radius: 100%;
+            background-color: $color--dark-grey;
+        }
+    }
+
+    &__type-label {
+        text-align: left;
+    }
+
+    .glide__slide--active & {
+        #{$root}__meta {
+            opacity: 1;
+        }
+    }
+
+    .glide--dragging & {
+        #{$root}__meta {
+            opacity: 0;
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__author,
+        #{$root}__link {
+            color: $color--white;
+        }
+
+        #{$root}__author-course {
+            color: $color--meta-darkbg;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__author,
+        #{$root}__link {
+            color: $color--black;
+        }
+
+        #{$root}__author-course {
+            color: $color--meta-lightbg;
+        }
+    }
+}

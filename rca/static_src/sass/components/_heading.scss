@@ -1,0 +1,36 @@
+.heading {
+    line-height: $line-height-large;
+    font-weight: $weight--normal;
+
+    &--display-one {
+        @include font-size(xxxxl);
+    }
+
+    &--display-two {
+        @include font-size(xxxl);
+    }
+
+    &--one {
+        @include font-size(xxl);
+    }
+
+    &--two {
+        @include font-size(xl);
+    }
+
+    &--three {
+        @include font-size(l);
+    }
+
+    &--four {
+        @include font-size(m);
+    }
+
+    &--five {
+        @include font-size(s);
+    }
+
+    &--link {
+        font-weight: $weight--bold;
+    }
+}

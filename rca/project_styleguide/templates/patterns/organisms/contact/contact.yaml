@@ -1,0 +1,20 @@
+context:
+  heading: Contact us
+  text: If you want to register your interest about joining the RCA and recieve updates from the RCA and it's community
+  link_text: Register your interest with us here
+  link_href: https://www.rca.ac.uk/register-your-interest/
+  page:
+    contact_model_email: testcourse@rca.ac.uk
+
+tags:
+  image:
+    image fill-80x84 as image_small:
+      target_var: image_small
+      raw:
+        url: '//placekitten.com/80/84'
+    image fill-580x607 as image_large:
+      target_var: image_large
+      raw:
+        url: '//placekitten.com/580/607'
+        width: '580'
+        height: '607'

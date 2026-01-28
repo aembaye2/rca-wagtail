@@ -1,0 +1,45 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block meta_tags %}
+    <link rel="canonical" href="{{ page.get_site.root_url }}{% pageurl self %}" />
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="page">
+
+        <header class="page__header bg bg--dark">
+            <div class="title-area title-area--index grid">
+                <div class="title-area__content">
+                    <h1 class="title-area__heading heading heading--display-two" id="main-content">{{ page.title }}</h1>
+                </div>
+                <div class="title-area__aside body--one">
+                    {{ page.introduction|richtext }}
+                </div>
+            </div>
+        </header>
+        <div class="page__content">
+            <div data-mount-programmes-explorer data-search-label="{{ page.search_placeholder_text }}"></div>
+
+            <section class="section section--top-space-large bg bg--light">
+                <div class="section__row">
+                    {% include "patterns/organisms/contact/contact.html" with heading=page.contact_model_title text=page.contact_model_text image=page.contact_model_image %}
+                </div>
+            </section>
+
+            {% comment %}Bottom notch below the contact block, matching programme_detail.html{% endcomment %}
+            <section class="section bg bg--dark" aria-hidden="true">
+                <div class="section__notch">
+                    <div class="section__notch-fill section__notch-fill--third-col"></div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ filters|json_script:"programme-listing-filters" }}
+    <script src="{% static 'js/programmes.js' %}"></script>
+{% endblock %}

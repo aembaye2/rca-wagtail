@@ -1,0 +1,32 @@
+context:
+  bg_image_url: '//placekitten.com/1440/1100'
+  heading: Learnings that last a lifetime
+  stats_block:
+    title: Learnings that last a lifetime
+    bg_image_url: '//placekitten.com/1000/500'
+    statistics:
+      - stat:
+        value:
+          after: '%'
+          number: 33
+          meta:
+          summary: 1 in 3 of our graduates are business owners or independent professionals.
+      - stat:
+        value:
+          number: 73
+          meta: Nationalities
+          summary: Our students come from all sections of the globe
+      - stat:
+        value:
+          after: st
+          number: 1
+          summary: We're the top rated art & design university in the world
+
+tags:
+  image:
+    stats_block.background_image max-1000x500 as bg_image:
+      target_var: bg_image
+      raw:
+        url: '//placekitten.com/1000/500'
+        width: '1000'
+        height: '500'

@@ -1,0 +1,102 @@
+.contact {
+    $root: &;
+    position: relative; // allow absolute positioning of image to bottom of component
+    padding-top: $gutter;
+    padding-bottom: ($gutter * 4);
+
+    @include media-query(medium) {
+        padding-top: ($gutter * 2);
+        padding-bottom: ($gutter * 6);
+    }
+
+    @include media-query(large) {
+        min-height: ($gutter * 20);
+        padding-top: ($gutter * 4);
+        padding-bottom: ($gutter * 3.5);
+    }
+
+    &__intro {
+        grid-column: 1 / span 2;
+        margin-bottom: ($gutter * 2);
+
+        @include media-query(medium) {
+            grid-column: auto;
+            margin-bottom: 0;
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 1;
+        }
+    }
+
+    &__heading {
+        padding-bottom: ($gutter * 1.5);
+        margin-bottom: ($gutter * 1.25);
+
+        .bg--dark & {
+            border-bottom: 1px solid $color--grid-line-light;
+        }
+
+        .bg--light & {
+            border-bottom: 1px solid $color--grid-line-dark;
+        }
+    }
+
+    &__text {
+        padding-right: $gutter;
+        margin-bottom: 0;
+
+        a {
+            color: $color--black;
+        }
+    }
+
+    &__link {
+        max-width: 165px !important;
+
+        @include media-query(medium) {
+            align-self: flex-end;
+        }
+
+        @include media-query(large) {
+            margin-top: ($gutter * 10);
+            justify-content: space-between;
+            max-width: 220px !important;
+        }
+    }
+
+    &__image-container {
+        display: none;
+
+        #{$root}__image {
+            @include z-index(above-gridlines);
+            position: absolute;
+            height: ($gutter * 30);
+            bottom: 0;
+            object-fit: cover;
+        }
+
+        @include media-query(large) {
+            display: block;
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__text {
+            color: $color--white;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__text {
+            color: $color--meta-lightbg;
+        }
+    }
+
+    .app--guide & {
+        // Match other heading sizes on the guide page
+        &__heading {
+            @include font-size(xl);
+        }
+    }
+}

@@ -1,0 +1,306 @@
+.title-area {
+    $root: &;
+    padding-bottom: ($gutter * 3);
+
+    @include media-query(medium) {
+        padding-bottom: ($gutter * 4);
+    }
+
+    @include media-query(large) {
+        padding-bottom: ($gutter * 3);
+    }
+
+    &--no-margin-for-mobile {
+        padding-bottom: 0;
+
+        @include media-query(medium) {
+            padding-bottom: ($gutter * 4);
+        }
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 3);
+        }
+    }
+
+    &--spaced {
+        #{$root}__heading {
+            margin-bottom: $gutter;
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 2);
+            }
+        }
+    }
+
+    &--breadcrumb {
+        #{$root}__content {
+            // Ensure that the baseline of the breadcrumb aligns with the top of the notch
+            @include media-query(large) {
+                position: relative;
+                top: -17px;
+                margin-bottom: -17px;
+            }
+        }
+    }
+
+    &__heading {
+        margin-bottom: ($gutter * 0.5);
+    }
+
+    &__meta {
+        margin-bottom: $gutter;
+    }
+
+    &__content {
+        padding-top: ($gutter * 1.5);
+        grid-column: 1 / span 2;
+
+        @include media-query(medium) {
+            grid-column: 1 / span 1;
+            position: relative;
+            padding-top: 0;
+            top: -14px; // specific value to align baseline of font with notch bottom
+        }
+
+        @include media-query(large) {
+            grid-column: 2 / span 3;
+            top: 0;
+
+            #{$root}--index & {
+                grid-column: 2 / span 2;
+            }
+        }
+
+        // custom breakpoint to bring page title and breadcrumbs above the fold
+        @media only screen and (max-width: 1440px) and (min-width: 1023px) {
+            .app--research-centre &,
+            .app--project-detail &,
+            .app--short-course &,
+            .app--landing-page & {
+                top: -55px;
+                margin-bottom: -55px;
+            }
+        }
+
+        &--three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            @include media-query(large) {
+                grid-template-columns: 1fr 1fr 1fr;
+                margin-bottom: ($gutter * 3);
+            }
+
+            // Stop heading messing up grid if it overlaps column
+            #{$root}__heading {
+                min-height: 0;
+                min-width: 0;
+                padding-right: 50%;
+
+                @include media-query(large) {
+                    padding-right: 0;
+                }
+            }
+
+            #{$root}__introduction {
+                @include media-query(large) {
+                    display: flex;
+                    align-items: flex-end;
+                    margin-bottom: ($gutter * 1.25);
+                }
+            }
+        }
+    }
+
+    &__credit {
+        display: none;
+
+        @include media-query(large) {
+            display: block;
+            padding-top: $gutter;
+        }
+    }
+
+    &__image {
+        position: relative;
+        left: -20px; // spill out of margins
+        grid-column: 1 / span 2;
+        width: calc(100% + 40px);
+
+        @include media-query(medium) {
+            grid-column: 2;
+            order: 2;
+            left: 0;
+            width: calc(100% + 60px);
+        }
+
+        @include media-query(large) {
+            grid-column: auto;
+            position: absolute;
+            top: 128px;
+            left: initial;
+            right: 0;
+            order: initial;
+            width: 50%;
+            height: auto;
+        }
+
+        @include media-query(large) {
+            width: 33.333%;
+        }
+    }
+
+    &__contact {
+        margin-bottom: $gutter;
+
+        @include media-query(large) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__aside {
+        // We want to align this aside text with the top of the second line of text of the heading.
+        // However there are viewports right after the "large" width where this would cause the text to overlap.
+        // In those cases, we align the text with the bottom of the line instead, so there is no overlap.
+        $xxxl-font: map-get($large-font-sizes, xxxl);
+        $heading-line-height: calc($xxxl-font * ($line-height-large / 100%));
+        $heading-line-2-bottom: $heading-line-height * 2;
+        // We want the text to be aligned with the top of lowercase letters on the line, so need extra space.
+        $heading-line-2-top: $heading-line-height * 1 + 23px;
+        grid-column: 2;
+
+        @include media-query(large) {
+            grid-column: 4;
+            margin-top: $heading-line-2-bottom;
+        }
+
+        @media only screen and (min-width: 1180px) {
+            margin-top: $heading-line-2-top;
+        }
+
+        .rich-text a {
+            // Prevent multiline CTAs from having bigger underlines than they should.
+            display: inline;
+        }
+    }
+
+    &__profile-title {
+        display: block;
+    }
+
+    &--index {
+        padding-top: $gutter * 5.5;
+
+        @include media-query(medium) {
+            padding-top: $gutter * 12;
+        }
+
+        @include media-query(large) {
+            padding-top: $gutter * 9;
+        }
+    }
+
+    // Staff detail specific styles
+    &--staff-detail {
+        padding-bottom: $gutter;
+
+        @include media-query(medium) {
+            padding-bottom: ($gutter * 3);
+        }
+
+        #{$root}__breadcrumb {
+            @include media-query(large) {
+                margin-bottom: ($gutter * 2);
+            }
+        }
+
+        #{$root}__heading {
+            margin-bottom: ($gutter * 0.75);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 3);
+            }
+        }
+
+        #{$root}__sub-heading {
+            margin-bottom: ($gutter * 0.75);
+
+            @include media-query(large) {
+                margin-bottom: ($gutter * 1.5);
+            }
+        }
+
+        #{$root}__content {
+            @include media-query(large) {
+                grid-column: 2 / span 2;
+            }
+        }
+    }
+
+    &--research-centre {
+        padding-bottom: ($gutter * 2);
+
+        @include media-query(medium) {
+            padding-bottom: ($gutter * 2);
+        }
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 2.25);
+        }
+
+        #{$root}__content {
+            @include media-query(medium) {
+                // Titles are generally longer on research centre pages, so give them more space on tablets
+                grid-column: 1 / span 2;
+            }
+            @include media-query(large) {
+                grid-column: 2 / span 3;
+            }
+        }
+    }
+
+    &--landing-page {
+        padding-bottom: ($gutter);
+
+        @include media-query(large) {
+            padding-bottom: ($gutter * 2);
+        }
+
+        #{$root}__heading {
+            @include media-query(large) {
+                max-width: 66.666%;
+                padding-right: ($gutter * 2);
+            }
+        }
+    }
+
+    &--guide,
+    &--event {
+        #{$root}__heading {
+            margin-bottom: ($gutter * 2);
+        }
+    }
+
+    .app--thanks & {
+        #{$root}__content {
+            @include media-query(medium) {
+                grid-column: 1 / span 2;
+            }
+            @include media-query(large) {
+                grid-column: 2 / span 3;
+            }
+        }
+    }
+
+    .bg--dark & {
+        #{$root}__sub-heading {
+            color: $color--meta-darkbg;
+        }
+    }
+
+    .bg--light & {
+        #{$root}__sub-heading {
+            color: $color--meta-lightbg;
+        }
+    }
+}

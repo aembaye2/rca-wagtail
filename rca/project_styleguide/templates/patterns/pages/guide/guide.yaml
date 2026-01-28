@@ -1,0 +1,68 @@
+context:
+  page:
+    get_ancestors:
+      - is_root: false
+        depth: 2
+        title: Research & Innovation
+      - is_root: false
+        depth: 3
+        title: Research at RCA
+    title: MRes RCA
+    edit_date: 7 March 2020
+    introduction: Join a thriving community of more than 250 MPhil and PhD students pursuing cutting-edge research at the world's leading postgraduate university for art & design
+    staff_link: false
+    contact: true
+    contact_model_image: true
+    body:
+      - dummy
+    published_at: !!timestamp '2020-05-13 2:00:00'
+    last_published_at: !!timestamp '2020-05-13 2:00:00'
+    related_pages_title: Index Module
+  anchor_nav:
+    - { title: Introduction, link: '#introduction' }
+    - { title: Article one, link: '#article-one' }
+    - { title: Article two, link: '#article-two' }
+    - { title: Staff, link: '#staff' }
+    - { title: Index module, link: '#index-module' }
+  related_pages:
+    title: Index Module
+    items:
+      - {
+          title: 'Innovation RCA',
+          link: '#',
+          meta: Link,
+          person: false,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in accumsan massa.',
+          image: true,
+        }
+      - {
+          title: 'Consultancy & knowledge exchange',
+          link: '#',
+          meta: Link,
+          person: false,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in accumsan massa.',
+          image: true,
+        }
+      - {
+          title: 'Custom executive education',
+          link: '#',
+          meta: Link,
+          person: false,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in accumsan massa.',
+          image: true,
+        }
+  related_staff:
+    - {
+        name: 'Beth Hughes',
+        role: 'Head of Programmes',
+        description: 'Director of her own practice, Beth Hughes has worked on projects of all scales, public and private, around the world.',
+        link: '#',
+        link_text: 'Read more',
+      }
+    - {
+        name: 'Beth Hughes',
+        role: 'Head of Programmes',
+        description: 'Director of her own practice, Beth Hughes has worked on projects of all scales, public and private, around the world.',
+        link: '#',
+        link_text: 'Read more',
+      }

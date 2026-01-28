@@ -1,0 +1,13 @@
+.anchor-nav-item {
+    margin-bottom: ($gutter * 0.5);
+
+    &__link {
+        @include underline-hover();
+        position: relative;
+        color: $color--white;
+
+        &.is-active {
+            @include underline-hover-target-reset();
+        }
+    }
+}
